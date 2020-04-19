@@ -17,7 +17,9 @@ public class Tablero {
 	public void turnoJugador() {}
 	
 	public Boolean comprobarVictoria() {
+		Boolean vict = False;
 		
+		return vict;
 	}
 	
 	public void iniciarPartida() {}
