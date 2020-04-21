@@ -21,4 +21,8 @@ public class Jugador {
 	public void setNombre(String n) {
 		nombre = n;
 	}
+	
+	public EnumTipo getTipo() {
+		return tipo;
+	}
 }
