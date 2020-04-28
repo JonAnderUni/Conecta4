@@ -1,3 +1,5 @@
+package codigo;
+
 
 public class Tablero {
 
@@ -11,9 +13,9 @@ public class Tablero {
 	}
 	
 	public void jugarTurno(Jugador j) {
-		if(j.getTipo() == "FACIL") {
+		if(j.getTipo().equals("FACIL")) {
 			turnoFacil();
-		}else if(j.getTipo() == "DIFICIL") {
+		}else if(j.getTipo().equals("DIFICIL")) {
 			turnoDificil();
 		}else {
 			turnoJugador();
@@ -21,24 +23,24 @@ public class Tablero {
 	}
 	
 	public void turnoFacil() {
-		int num = (Math.random()*15);
+		int num = (int) (Math.random()*15);
 		rellenarCasilla(num);
 	}
 	
 	public void rellenarCasilla(int columna) {
-		Boolean rellenado = False;
+		Boolean rellenado = false;
 		int cont = 0;
-		while(rellenado = False) {
-			while(rellenado == False) {
-				if(tablero[columna][cont] != 0) {
+		while(rellenado = false) {
+			while(rellenado == false) {
+				if(tablero[columna][cont].getValor() != 0) {
 					cont++;
 				}else {
-					tablero[columna][cont] = 1;
-					rellenado = True;
+					tablero[columna][cont].setValor(1);
+					rellenado = true;
 				}
 			}
-			if(rellenado == False) {
-				if(columna = 15) {
+			if(rellenado == false) {
+				if(columna == 15) {
 					columna = 0;
 				}else {
 					columna++;
@@ -52,7 +54,7 @@ public class Tablero {
 	public void turnoJugador() { }
 	
 	public Boolean comprobarVictoria() {
-		Boolean vict = False;
+		Boolean vict = false;
 		
 		
 		return vict;

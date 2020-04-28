@@ -1,8 +1,10 @@
+package codigo;
+
 
 public class Jugador {
 
 	public EnumTipo tipo;
-	public nombre String;
+	public String nombre;
 	
 	
 	public Jugador(EnumTipo t, String n) {
