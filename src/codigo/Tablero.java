@@ -1,5 +1,8 @@
 package codigo;
 
+import java.awt.*;
+import java.applet.*;
+
 
 public class Tablero {
 
@@ -51,7 +54,10 @@ public class Tablero {
 	
 	public void turnoDificil() {}
 	
-	public void turnoJugador() { }
+	public void turnoJugador() { 
+		int boton = 0;//aqui hay que meter boton de la interfaz
+		rellenarCasilla(boton);
+	}
 	
 	public Boolean comprobarVictoria() {
 		Boolean vict = false;
@@ -60,5 +66,47 @@ public class Tablero {
 		return vict;
 	}
 	
+	private Boolean comprobarHorizontal(int col, int piso) {
+		int cont = 1;
+		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		while((col < 16) && (cont < 4)) {
+			col++;
+			if(tablero[col][piso].getValor() == jug) {
+				cont++;
+			}else {
+				break;
+			}
+		}
+		if(cont == 4) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	private Boolean comprobarVertical(int col, int piso) {
+		int cont = 1;
+		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		while((piso < 9) && (cont < 4)) {
+			piso++;
+			if(tablero[col][piso].getValor() == jug) {
+				cont++;
+			}else {
+				break;
+			}
+		}
+		if(cont == 4) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	private Boolean comprobarDiagUp() {
+		Boolean si = null;
+		return si;
+	}
+	private Boolean comprobarDiagDown() {
+		Boolean si = null;
+		return si;
+	}
 	public void iniciarPartida() { }
 }
