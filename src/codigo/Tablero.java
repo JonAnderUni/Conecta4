@@ -10,6 +10,8 @@ public class Tablero {
 	public Jugador j1;
 	public Jugador j2;
 	public Jugador ultimoTurno;
+	public int CVacias;
+	public Jugador ganador;
 	
 	public Tablero(Jugador a, Jugador b) {
 		
@@ -60,8 +62,13 @@ public class Tablero {
 	}
 	
 	public Boolean comprobarVictoria() {
+		int cont;
 		Boolean vict = false;
-		
+		for(int col = 1; col < 17; col++) {
+			for(int piso = 1; piso < 10; piso++) {
+				
+			}
+		}
 		
 		return vict;
 	}
@@ -74,14 +81,15 @@ public class Tablero {
 			if(tablero[col][piso].getValor() == jug) {
 				cont++;
 			}else {
-				break;
+				return false;
 			}
 		}
-		if(cont == 4) {
-			return true;
+		if(jug == 1) {
+			ganador = j1;
 		}else {
-			return false;
+			ganador = j2;
 		}
+		return true;
 	}
 	private Boolean comprobarVertical(int col, int piso) {
 		int cont = 1;
@@ -91,22 +99,53 @@ public class Tablero {
 			if(tablero[col][piso].getValor() == jug) {
 				cont++;
 			}else {
-				break;
+				return false;
 			}
 		}
-		if(cont == 4) {
-			return true;
+		if(jug == 1) {
+			ganador = j1;
 		}else {
-			return false;
+			ganador = j2;
+		}		
+		return true;
+	}
+	private Boolean comprobarDiagUp(int col, int piso) {
+		int cont = 1;
+		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		while((piso < 9) && (col < 16) && (cont < 4)) {
+			piso++;
+			col++;
+			if(tablero[col][piso].getValor() == jug) {
+				cont++;
+			}else {
+				return false;
+			}
 		}
+		if(jug == 1) {
+			ganador = j1;
+		}else {
+			ganador = j2;
+		}		
+		return true;
 	}
-	private Boolean comprobarDiagUp() {
-		Boolean si = null;
-		return si;
-	}
-	private Boolean comprobarDiagDown() {
-		Boolean si = null;
-		return si;
+	private Boolean comprobarDiagDown(int col, int piso) {
+		int cont = 1;
+		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		while((piso > 0) && (col < 16) && (cont < 4)) {
+			piso--;
+			col++;
+			if(tablero[col][piso].getValor() == jug) {
+				cont++;
+			}else {
+				return false;
+			}
+		}
+		if(jug == 1) {
+			ganador = j1;
+		}else {
+			ganador = j2;
+		}		
+		return true;
 	}
 	public void iniciarPartida() { }
 }
