@@ -10,8 +10,8 @@ public class Tablero {
 	public Jugador j1;
 	public Jugador j2;
 	public Jugador ultimoTurno;
-	public int CVacias;
-	public Jugador ganador;
+	public int CVacias = 0;
+	public Jugador ganador = null;
 	
 	public Tablero(Jugador a, Jugador b) {
 		
@@ -62,14 +62,24 @@ public class Tablero {
 	}
 	
 	public Boolean comprobarVictoria() {
-		int cont;
+		int cont = 0;
 		Boolean vict = false;
-		for(int col = 1; col < 17; col++) {
-			for(int piso = 1; piso < 10; piso++) {
-				
+		for(int col = 1; col <= 16; col++) {
+			for(int piso = 1; piso <= 9; piso++) {
+				if((tablero[col][piso].getValor() != 0) && (ganador == null)) {
+					comprobarHorizontal(col, piso);
+					comprobarVertical(col, piso);
+					comprobarDiagUp(col, piso);
+					comprobarDiagDown(col, piso);
+				}else if(tablero[col][piso].getValor() == 0) {
+					cont++;
+				}
 			}
 		}
-		
+		CVacias = cont;
+		if((ganador != null) || (CVacias == 0)) {
+			vict = true;
+		}
 		return vict;
 	}
 	
