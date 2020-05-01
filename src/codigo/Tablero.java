@@ -54,7 +54,25 @@ public class Tablero {
 		}
 	}
 	
-	public void turnoDificil() {}
+	public void turnoDificil() {
+		int mejorJugada, jugada, aux;
+		mejorJugada = 0;
+		jugada = 8;
+		for(int col = 1; col <= 16; col++) {
+			aux = puntuacionJugada(col);
+			if(aux >= mejorJugada) {
+				jugada = col;
+				mejorJugada = aux;
+			}
+		}
+	}
+	
+	private int puntuacionJugada(int col) {
+		Casilla[][]  tableroTemporal = tablero;//new Casilla[16][9]; 
+		
+		return 0;
+		
+	}
 	
 	public void turnoJugador() { 
 		int boton = 0;//aqui hay que meter boton de la interfaz
