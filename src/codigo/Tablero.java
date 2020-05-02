@@ -77,8 +77,30 @@ public class Tablero {
 	 * puntuaciones posibles:
 	 * --ganar la partida o hacer 4 en raya: 15
 	 * --evitar la victoria del rival que tien 3 de cuatro en raya : 14
-	 * --
+	 * --el rival tiene 2 fichas seguidas y podria rellenar 4 en liena por ambis lados : 10
+	 * --la ia tiene 2 fichas seguidas
+	 * --la ia tiene una ficha
 	 * */
+	private Boolean hacer4EnRaya(Casilla[][] t, int c) {
+		return null;
+		
+	}
+	private Boolean evitarVictoriaDelRival(Casilla[][] t, int c) {
+		return null;
+		
+	}
+	private Boolean rival2FichasConHuecos2Lados(Casilla[][] t, int c) {
+		return null;
+		
+	}
+	private Boolean IA2FichasSeguidas(Casilla[][] t, int c) {
+		return null;
+		
+	}
+	private Boolean IA1ficha(Casilla[][] t, int c) {
+		return null;
+		
+	}
 	
 	public void turnoJugador() { 
 		int boton = 0;//aqui hay que meter boton de la interfaz
