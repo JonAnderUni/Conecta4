@@ -73,6 +73,12 @@ public class Tablero {
 		return 0;
 		
 	}
+	/*
+	 * puntuaciones posibles:
+	 * --ganar la partida o hacer 4 en raya: 15
+	 * --evitar la victoria del rival que tien 3 de cuatro en raya : 14
+	 * --
+	 * */
 	
 	public void turnoJugador() { 
 		int boton = 0;//aqui hay que meter boton de la interfaz
