@@ -82,12 +82,27 @@ public class Tablero {
 	 * --la ia tiene una ficha
 	 * */
 	private Boolean hacer4EnRaya(Casilla[][] t, int c) {
-		return null;
+		int aux = 1;
+		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
+			aux++;
+		}
+		if(aux < 9) {
+			t[c][aux].setValor(1);
+		}
+		return comprobarVictoria(t);
 		
 	}
 	private Boolean evitarVictoriaDelRival(Casilla[][] t, int c) {
-		return null;
+		int aux = 1;
+		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
+			aux++;
+		}
+		if(aux < 9) {
+			t[c][aux].setValor(1);
+		}
+		Boolean seEvita;
 		
+		return null;
 	}
 	private Boolean rival2FichasConHuecos2Lados(Casilla[][] t, int c) {
 		return null;
@@ -107,17 +122,17 @@ public class Tablero {
 		rellenarCasilla(boton);
 	}
 	
-	public Boolean comprobarVictoria() {
+	public Boolean comprobarVictoria(Casilla[][] t) {
 		int cont = 0;
 		Boolean vict = false;
 		for(int col = 1; col <= 16; col++) {
 			for(int piso = 1; piso <= 9; piso++) {
-				if((tablero[col][piso].getValor() != 0) && (ganador == null)) {
-					comprobarHorizontal(col, piso);
-					comprobarVertical(col, piso);
-					comprobarDiagUp(col, piso);
-					comprobarDiagDown(col, piso);
-				}else if(tablero[col][piso].getValor() == 0) {
+				if((t[col][piso].getValor() != 0) && (ganador == null)) {
+					comprobarHorizontal(t, col, piso);
+					comprobarVertical(t, col, piso);
+					comprobarDiagUp(t, col, piso);
+					comprobarDiagDown(t, col, piso);
+				}else if(t[col][piso].getValor() == 0) {
 					cont++;
 				}
 			}
@@ -129,12 +144,12 @@ public class Tablero {
 		return vict;
 	}
 	
-	private Boolean comprobarHorizontal(int col, int piso) {
+	private Boolean comprobarHorizontal(Casilla[][] t, int col, int piso) {
 		int cont = 1;
-		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
 		while((col < 16) && (cont < 4)) {
 			col++;
-			if(tablero[col][piso].getValor() == jug) {
+			if(t[col][piso].getValor() == jug) {
 				cont++;
 			}else {
 				return false;
@@ -147,12 +162,12 @@ public class Tablero {
 		}
 		return true;
 	}
-	private Boolean comprobarVertical(int col, int piso) {
+	private Boolean comprobarVertical(Casilla[][] t, int col, int piso) {
 		int cont = 1;
-		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
 		while((piso < 9) && (cont < 4)) {
 			piso++;
-			if(tablero[col][piso].getValor() == jug) {
+			if(t[col][piso].getValor() == jug) {
 				cont++;
 			}else {
 				return false;
@@ -165,13 +180,13 @@ public class Tablero {
 		}		
 		return true;
 	}
-	private Boolean comprobarDiagUp(int col, int piso) {
+	private Boolean comprobarDiagUp(Casilla[][] t, int col, int piso) {
 		int cont = 1;
-		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
 		while((piso < 9) && (col < 16) && (cont < 4)) {
 			piso++;
 			col++;
-			if(tablero[col][piso].getValor() == jug) {
+			if(t[col][piso].getValor() == jug) {
 				cont++;
 			}else {
 				return false;
@@ -184,13 +199,13 @@ public class Tablero {
 		}		
 		return true;
 	}
-	private Boolean comprobarDiagDown(int col, int piso) {
+	private Boolean comprobarDiagDown(Casilla[][] t, int col, int piso) {
 		int cont = 1;
-		int jug;if(tablero[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
+		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
 		while((piso > 0) && (col < 16) && (cont < 4)) {
 			piso--;
 			col++;
-			if(tablero[col][piso].getValor() == jug) {
+			if(t[col][piso].getValor() == jug) {
 				cont++;
 			}else {
 				return false;
