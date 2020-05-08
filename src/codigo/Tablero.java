@@ -105,15 +105,130 @@ public class Tablero {
 		return null;
 	}
 	private Boolean rival2FichasConHuecos2Lados(Casilla[][] t, int c) {
-		return null;
+		int aux = 1;
+		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
+			aux++;
+		}
+		if(aux < 9) {
+			t[c][aux].setValor(1);
+		}
+		
+		Boolean dosFichas = false;
+		
+		// comprobar margenes izquierda
+		if( (c - 2) > 0 ) {
+			//Comprobar si las dos casillas a la izquierda son de la ia
+			if ( (t[c - 1][aux].getValor() == 2) && (t[c - 2][aux].getValor() == 2) ) {
+				dosFichas = true;
+			}
+		}
+		
+		// comprobar margenes derecha
+		if( (c + 2) < 9 ) {
+			//comprobar si las dos casillas a la derecha son de la ia
+			if ( (t[c + 1][aux].getValor() == 2) && (t[c + 2][aux].getValor() == 2) ) {
+				dosFichas = true;
+			}
+		
+		}
+		
+		return dosFichas;
 		
 	}
 	private Boolean IA2FichasSeguidas(Casilla[][] t, int c) {
-		return null;
+		int aux = 1;
+		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
+			aux++;
+		}
+		if(aux < 9) {
+			t[c][aux].setValor(1);
+		}
+		
+		Boolean dosFichas = false;
+		
+		// 2 fichas en vertical
+		// comprobar margenes izquierda
+		if( (c - 2) > 0 ) {
+			//Comprobar si las dos casillas a la izquierda son de la ia
+			if ( (t[c - 1][aux].getValor() == 1) && (t[c - 2][aux].getValor() == 1) ) {
+				dosFichas = true;
+			}
+		}
+		
+		// comprobar margenes derecha
+		if( (c + 2) < 9 ) {
+			//comprobar si las dos casillas a la derecha son de la ia
+			if ( (t[c + 1][aux].getValor() == 1) && (t[c + 2][aux].getValor() == 1) ) {
+				dosFichas = true;
+			}
+		
+		}
+		
+		// 2 fichas en horizontal
+		// comprobar margenes abajo
+		if( (aux - 2) > 0 ) {
+			//Comprobar si las dos casillas de debajo son de la ia
+			if ( (t[c][aux - 1].getValor() == 1) && (t[c][aux - 2].getValor() == 1) ) {
+				dosFichas = true;
+			}
+		}
+		
+		return dosFichas;
 		
 	}
 	private Boolean IA1ficha(Casilla[][] t, int c) {
-		return null;
+		int aux = 1;
+		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
+			aux++;
+		}
+		if(aux < 9) {
+			t[c][aux].setValor(1);
+		}
+		
+		Boolean dosFichas = false;
+		
+		// 1 ficha en vertical
+		// comprobar margenes izquierda
+		if( (c - 2) > 0 ) {
+			//Comprobar si las dos casillas a la izquierda son de la ia
+			if ( (t[c - 1][aux].getValor() == 1) && (t[c - 2][aux].getValor() == 1) ) {
+				dosFichas = true;
+			}
+		}
+		
+		// comprobar margenes derecha
+		if( (c + 2) < 9 ) {
+			//comprobar si las dos casillas a la derecha son de la ia
+			if ( (t[c + 1][aux].getValor() == 1) && (t[c + 2][aux].getValor() == 1) ) {
+				dosFichas = true;
+			}
+		
+		}
+		
+		// 2 fichas en horizontal
+		// comprobar margenes abajo
+		if( (aux - 2) > 0 ) {
+			//Comprobar si las dos casillas de debajo son de la ia
+			if ( (t[c][aux - 1].getValor() == 1) && (t[c][aux - 2].getValor() == 1) ) {
+				dosFichas = true;
+			}
+		}
+		
+		//Comprobar si existe otra ficha de la ia alrededor
+		//izquierda
+		if( ((c - 1) > 0) && (t[c - 1][aux].getValor() == 1) ) {
+			dosFichas = true;
+		}
+		//derecha
+		if( ((c + 1) < 9) && (t[c + 1][aux].getValor() == 1) ) {
+			dosFichas = true;
+		}
+		//abajo
+		if( ((aux - 1) < 0) && (t[c][aux - 1].getValor() == 1) ) {
+			dosFichas = true;
+		}
+		
+		return dosFichas;
 		
 	}
 	
