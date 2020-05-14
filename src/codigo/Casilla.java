@@ -1,7 +1,8 @@
 package codigo;
 
+import java.util.Observable;
 
-public class Casilla {
+public class Casilla extends Observable {
 	private int valor;
 	
 	public Casilla() {
