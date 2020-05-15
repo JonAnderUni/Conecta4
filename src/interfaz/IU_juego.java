@@ -1,14 +1,21 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -31,16 +38,17 @@ public class IU_juego extends JFrame implements Observer{
 	private JMenuItem mntmNewMenuItem_1;
 	private JMenuItem mntmNewMenuItem_2;
 	private JLabel lblPuntuacion;
-	private JLabel lblTiempo;
+	private JLabel lblTiempoC;
 	private JPanel panelPuntuacion;
 	private JPanel panelTiempo;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JButton[] tableroBotones;
-	private JLabel[][] tableroLabels;
+	private JLabel lblTiempoD;
+	private JLabel lblTiempoU;
+	private JButton[][] tableroBotones;
+	private int cont;
+	private Timer timer;
 	/**
 	 * Launch the application.
 	 */
@@ -89,8 +97,65 @@ public class IU_juego extends JFrame implements Observer{
 		
 	}
 	
-	private void crearTablero() {
+	private Timer iniciarTimer() {
+		// Inicia el contador del timer
+
+		cont = 0;
+
 		
+		if (timer == null) {
+			timer = new Timer(1000, new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					cont++;
+					contadorTimer();
+				}
+			});
+			timer.start();
+		}
+		return timer;
+	}
+
+	private void contadorTimer() {
+
+	
+		int centenas = cont / 100;
+		int decenas = (cont - (centenas * 100)) / 10;
+		int unidades = cont - (centenas * 100 + decenas * 10);
+
+		ImageIcon imgD = new ImageIcon("img/r" + decenas + ".png");
+		ImageIcon imgU = new ImageIcon("img/r" + unidades + ".png");
+		ImageIcon imgC = new ImageIcon("img/r" + centenas + ".png");
+
+		java.awt.Image timerC = imgC.getImage();
+		java.awt.Image sizeC = timerC.getScaledInstance(20, 25, 0);
+		ImageIcon centena = new ImageIcon(sizeC);
+
+		java.awt.Image timerD = imgD.getImage();
+		java.awt.Image sizeD = timerD.getScaledInstance(20, 25, 0);
+		ImageIcon decena = new ImageIcon(sizeD);
+
+		java.awt.Image timerU = imgU.getImage();
+		java.awt.Image sizeU = timerU.getScaledInstance(20, 25, 0);
+		ImageIcon unidad = new ImageIcon(sizeU);
+
+		getLblTiempoC().setIcon(centena);
+		getLblTiempoD().setIcon(decena);
+		getLblTiempoU().setIcon(unidad);
+	
+		redimensionarContadorTimer();
+	}
+	
+	private void redimensionarContadorTimer() {
+
+		int width = (getPanelNorte().getWidth()) / 3;
+		int inicio = (50 * width) / 100;
+
+		getLblTiempoC().setBounds(inicio - 30, 1, 20, panelNorte.getHeight());
+		getLblTiempoD().setBounds(inicio - 10, 1, 20, panelNorte.getHeight());
+		getLblTiempoU().setBounds(inicio + 10, 1, 20, panelNorte.getHeight());
+
 	}
 	
 	private JPanel getPanelNorte() {
@@ -124,8 +189,21 @@ public class IU_juego extends JFrame implements Observer{
 		if (panelCentro == null) {
 			panelCentro = new JPanel();
 			panelCentro.setLayout(new GridLayout(6, 9, 0, 0));
-			
-			
+			tableroBotones = new JButton[6][9];
+			for (int i = 0; i < tableroBotones.length; i++) {
+				for (int j = 0; j < tableroBotones[0].length; j++) {
+					JButton jb = new JButton();
+					jb.setBackground(Color.LIGHT_GRAY);
+					jb.setBorderPainted(true);
+					tableroBotones[i][j] = jb;
+					tableroBotones[i][j].addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent arg0) {
+							
+						}
+						
+					});
+				}
+			}
 			
 		}
 		return panelCentro;
@@ -166,15 +244,16 @@ public class IU_juego extends JFrame implements Observer{
 	}
 	private JLabel getLblPuntuacion() {
 		if (lblPuntuacion == null) {
-			lblPuntuacion = new JLabel("New label");
+			lblPuntuacion = new JLabel("");
 		}
 		return lblPuntuacion;
 	}
-	private JLabel getLblTiempo() {
-		if (lblTiempo == null) {
-			lblTiempo = new JLabel("New label");
+	private JLabel getLblTiempoC() {
+		if (lblTiempoC == null) {
+			lblTiempoC = new JLabel("");
+			lblTiempoC.setBounds(106, 5, 0, 0);
 		}
-		return lblTiempo;
+		return lblTiempoC;
 	}
 	private JPanel getPanelPuntuacion() {
 		if (panelPuntuacion == null) {
@@ -189,41 +268,44 @@ public class IU_juego extends JFrame implements Observer{
 	private JPanel getPanelTiempo() {
 		if (panelTiempo == null) {
 			panelTiempo = new JPanel();
-			panelTiempo.add(getLblTiempo());
-			panelTiempo.add(getLblNewLabel_3());
-			panelTiempo.add(getLblNewLabel_4());
+			panelTiempo.setLayout(null);
+			panelTiempo.add(getLblTiempoC());
+			panelTiempo.add(getLblTiempoD());
+			panelTiempo.add(getLblTiempoU());
 		}
 		return panelTiempo;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("New label");
+			lblNewLabel = new JLabel("");
 		}
 		return lblNewLabel;
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("New label");
+			lblNewLabel_1 = new JLabel("");
 		}
 		return lblNewLabel_1;
 	}
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("New label");
+			lblNewLabel_2 = new JLabel("");
 		}
 		return lblNewLabel_2;
 	}
-	private JLabel getLblNewLabel_3() {
-		if (lblNewLabel_3 == null) {
-			lblNewLabel_3 = new JLabel("New label");
+	private JLabel getLblTiempoD() {
+		if (lblTiempoD == null) {
+			lblTiempoD = new JLabel("");
+			lblTiempoD.setBounds(111, 5, 0, 0);
 		}
-		return lblNewLabel_3;
+		return lblTiempoD;
 	}
-	private JLabel getLblNewLabel_4() {
-		if (lblNewLabel_4 == null) {
-			lblNewLabel_4 = new JLabel("New label");
+	private JLabel getLblTiempoU() {
+		if (lblTiempoU == null) {
+			lblTiempoU = new JLabel("");
+			lblTiempoU.setBounds(116, 5, 0, 0);
 		}
-		return lblNewLabel_4;
+		return lblTiempoU;
 	}
 
 	

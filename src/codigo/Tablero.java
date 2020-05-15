@@ -6,7 +6,7 @@ import java.applet.*;
 
 public class Tablero {
 
-	public Casilla[][] tablero = new Casilla[16][9];
+	public Casilla[][] tablero = new Casilla[6][9];
 	public Jugador j1;
 	public Jugador j2;
 	public Jugador ultimoTurno;
@@ -28,7 +28,7 @@ public class Tablero {
 	}
 	
 	public void turnoFacil() {
-		int num = (int) (Math.random()*15);
+		int num = (int) (Math.random()*5);
 		rellenarCasilla(num);
 	}
 	
@@ -45,7 +45,7 @@ public class Tablero {
 				}
 			}
 			if(rellenado == false) {
-				if(columna == 15) {
+				if(columna == 5) {
 					columna = 0;
 				}else {
 					columna++;
@@ -58,7 +58,7 @@ public class Tablero {
 		int mejorJugada, jugada, aux;
 		mejorJugada = 0;
 		jugada = 8;
-		for(int col = 1; col <= 16; col++) {
+		for(int col = 1; col <= 9; col++) {
 			aux = puntuacionJugada(col);
 			if(aux >= mejorJugada) {
 				jugada = col;
