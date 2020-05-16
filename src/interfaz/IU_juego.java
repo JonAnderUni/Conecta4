@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+
+import codigo.Tablero;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -89,6 +92,51 @@ public class IU_juego extends JFrame implements Observer{
 		this.setTitle("Conecta 4");
 		ImageIcon imagen = new ImageIcon("img/greymine.png");
 		this.setIconImage(imagen.getImage());
+	}
+	
+	public void crearTablero() {
+		Tablero.getTablero().eliminarTablero();
+		
+		
+		//getPanelCentro().setSize((faltan dimension x),(falta dimension y));
+		//setSize();  faltan dimensiones
+		
+		
+		if (timer != null) {
+			cont = 0;
+			ImageIcon imgD = new ImageIcon("img/r0.png");
+			java.awt.Image timerD = imgD.getImage();
+			java.awt.Image sizeD = timerD.getScaledInstance(20, 25, 0);
+			ImageIcon contador = new ImageIcon(sizeD);
+			getLblTiempoC().setIcon(contador);
+			getLblTiempoD().setIcon(contador);
+			getLblTiempoU().setIcon(contador);
+
+			redimensionarContadorTimer();
+			timer.stop();
+			timer.restart();
+		}
+		contadorTimer();
+		
+		getPanelCentro().removeAll();
+		
+		tableroBotones = new JButton[6][9];
+		for (int i = 0; i < tableroBotones.length; i++) {
+			for (int j = 0; j < tableroBotones[0].length; j++) {
+				JButton jb = new JButton();
+				jb.setBackground(Color.LIGHT_GRAY);
+				jb.setBorderPainted(true);
+				tableroBotones[i][j] = jb;
+				tableroBotones[i][j].addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent arg0) {
+						
+					}
+					
+				});
+				
+				getPanelCentro().add(jb);
+			}
+		}
 	}
 	
 	@Override
@@ -189,21 +237,7 @@ public class IU_juego extends JFrame implements Observer{
 		if (panelCentro == null) {
 			panelCentro = new JPanel();
 			panelCentro.setLayout(new GridLayout(6, 9, 0, 0));
-			tableroBotones = new JButton[6][9];
-			for (int i = 0; i < tableroBotones.length; i++) {
-				for (int j = 0; j < tableroBotones[0].length; j++) {
-					JButton jb = new JButton();
-					jb.setBackground(Color.LIGHT_GRAY);
-					jb.setBorderPainted(true);
-					tableroBotones[i][j] = jb;
-					tableroBotones[i][j].addMouseListener(new MouseAdapter() {
-						public void mouseClicked(MouseEvent arg0) {
-							
-						}
-						
-					});
-				}
-			}
+			
 			
 		}
 		return panelCentro;

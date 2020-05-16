@@ -1,20 +1,38 @@
 package codigo;
 
-import java.awt.*;
-import java.applet.*;
-
 
 public class Tablero {
 
-	public Casilla[][] tablero = new Casilla[6][9];
-	public Jugador j1;
-	public Jugador j2;
-	public Jugador ultimoTurno;
-	public int CVacias = 0;
-	public Jugador ganador = null;
+	private Casilla[][] tablero;
+	private Jugador j1;
+	private Jugador j2;
+	private Jugador ultimoTurno;
+	private int CVacias = 0;
+	private Jugador ganador = null;
+	private static Tablero mTablero;
 	
-	public Tablero(Jugador a, Jugador b) {
+	private Tablero() {
 		
+	}
+	
+	public static Tablero getTablero() {
+		if(mTablero == null) {
+			mTablero = new Tablero();
+		}
+		return mTablero;
+	}
+	
+	public void setJugadores(Jugador a, Jugador b) {
+		j1 = a;
+		j2 = b;
+	}
+	
+	public void generarTablero() {
+		tablero = new Casilla[6][9];
+	}
+	
+	public void eliminarTablero() {
+		tablero = null;
 	}
 	
 	public void jugarTurno(Jugador j) {

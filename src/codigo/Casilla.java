@@ -15,6 +15,7 @@ public class Casilla extends Observable {
 	
 	public void setC(int v) {
 		valor = v;
+		setChanged();
 	}
 	
 	public int getValor() {
