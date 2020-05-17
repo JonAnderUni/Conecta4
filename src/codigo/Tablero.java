@@ -1,36 +1,112 @@
 package codigo;
 
+import java.awt.Image;
+import java.io.IOException;
+import java.util.Observable;
 
-public class Tablero {
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import interfaz.IU_juego;
+
+public class Tablero extends Observable{
 
 	private Casilla[][] tablero;
 	private Jugador j1;
 	private Jugador j2;
-	private Jugador ultimoTurno;
+	//private Jugador ultimoTurno;
+	private Jugador turnoActual;
 	private int CVacias = 0;
 	private Jugador ganador = null;
 	private static Tablero mTablero;
+	private String idioma = "Castellano";
 	
-	private Tablero() {
-		
+	private String turno;	//Jugador1 o Jugador2
+	
+	
+	private static int ancho = 9;
+	private static int alto = 6;
+	
+	public Tablero(int pAncho, int pAlto) {
+		this.ancho = pAncho;
+		this.alto = pAlto;
+		this.tablero = new Casilla[ancho][alto];
+		System.out.println("Se ha generado el tablero");
 	}
+	
+	public Casilla getCasilla(int pAncho, int pAlto) {
+		return tablero[pAncho][pAlto];
+	}
+	
+	public void setCasilla(int rAncho, int rAlto, Casilla nuevaCas) {
+		tablero[rAncho][rAlto] = nuevaCas;
+	}
+	
+
+	
 	
 	public static Tablero getTablero() {
 		if(mTablero == null) {
-			mTablero = new Tablero();
+			mTablero = new Tablero(ancho, alto);
 		}
 		return mTablero;
 	}
+
+/*	public Casilla[][] getTablero() {
+		return this.tablero;
+	}
+*/
+	
+	public Jugador getJugador1(){
+		return j1;
+	}
+	
+	public Jugador getJugador2(){
+		return j2;
+	}
+	
 	
 	public void setJugadores(Jugador a, Jugador b) {
 		j1 = a;
 		j2 = b;
 	}
 	
-	public void generarTablero() {
-		tablero = new Casilla[6][9];
+	public Jugador getTurnoActual(){
+		return this.turnoActual;
 	}
 	
+	public void setTurno(String pTurno){
+		this.turno = pTurno;
+	}
+	
+	public void cambiarTurno(){
+		if(turnoActual.getNum()==1){
+			turnoActual = j2;
+		}else{
+			turnoActual = j1;
+		}	
+	}
+	
+	public void generarTablero() {
+		int ancho = 9;
+		int alto = 6;
+		
+		//Rellenar el tablero con 6x9 casillas con valor 0 (NO NULL)
+		for(int x = 0; x<ancho; x++){
+			for(int y = 0; y<alto; y++){
+				Casilla nuevaCasilla = new Casilla();
+				this.setCasilla(x, y, nuevaCasilla);
+				nuevaCasilla.setX(x);
+				nuevaCasilla.setY(y);
+				tablero[x][y].setC(0);
+			}
+			
+		}
+		
+	}	
+		
+		
+		
 	public void eliminarTablero() {
 		tablero = null;
 	}
@@ -351,5 +427,75 @@ public class Tablero {
 		}		
 		return true;
 	}
-	public void iniciarPartida() { }
+	
+	
+	public int meterFicha(int pAncho, int pAlto){
+		
+		int valor = 0;
+		
+		if(turnoActual.getNum()==1){
+			valor = 1;
+		}else{
+			valor = 2;
+		}
+		
+		if(pAlto==-1){
+			System.out.println("No puedes meter una ficha ahi");
+			
+		} else{
+
+			int nuevoAlto = bajarFicha(pAncho, pAlto);
+			
+			if(nuevoAlto!=-1){
+				tablero[pAncho][nuevoAlto].setC(valor);
+				return nuevoAlto;
+			}
+		}
+		
+		return -1;
+	}
+	
+	
+	
+	public boolean columnaLlena(int pAncho, int pAlto){
+		if(tablero[pAncho][0].getC()!=0){		//La columna esta llena
+			return true;
+		}
+		return false;
+	}
+
+	
+	public int bajarFicha(int pAncho, int pAlto){
+		
+		boolean encontrado = false;
+		int nuevoAlto = -1;
+		
+		if(columnaLlena(pAncho, pAlto)){
+			System.out.println("NO SE PUEDE METER LA FICHA");
+		}else{
+			nuevoAlto=5;
+			while(!encontrado){
+				if(tablero[pAncho][nuevoAlto].getC()!=0){
+					nuevoAlto--;
+				}
+				else{
+					//Ahi lo puedo poner
+					encontrado=true;
+				}
+			}
+		}
+
+		return nuevoAlto;
+	}
+	
+	public void iniciarPartida() {
+		
+		turnoActual = j1;
+		
+		
+		
+		setChanged();
+		notifyObservers(this);
+		
+	}
 }
