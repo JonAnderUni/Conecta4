@@ -58,6 +58,8 @@ public class IU_juego extends JFrame implements Observer{
 	
 	
 	private String modo;
+	private int cont;
+	private Timer timer;
 
 	
 	
@@ -71,7 +73,7 @@ public class IU_juego extends JFrame implements Observer{
 					IU_juego frame = new IU_juego();
 					frame.setVisible(true);
 					
-					System.out.println("El jugador 1 es " + Conecta4.getConecta4().getTablero().getJugador1().getNombre());
+					//System.out.println("El jugador 1 es " + Conecta4.getConecta4().getTablero().getJugador1().getNombre());
 					
 			/*		System.out.println("EMPEZAMOS");
 					Conecta4.getConecta4().empezarPartida();
@@ -196,11 +198,15 @@ public class IU_juego extends JFrame implements Observer{
 								
 								if (e.getButton() == MouseEvent.BUTTON1) {
 									
-									System.out.println("click izquierdo");
+									//System.out.println("click izquierdo");
 									e.getSource();
 									
+									if(timer == null) {
+										iniciarTimer();
+									}
+									
 									String cmd = etiqueta.getText();
-									System.out.println(cmd);
+									//System.out.println(cmd);
 									String splitXY = ",";
 									String[] data = cmd.split(splitXY);
 									
@@ -209,7 +215,7 @@ public class IU_juego extends JFrame implements Observer{
 									
 									int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
 									
-									System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
+									//System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
 									
 									if(nuevoAlto!=-1){
 										//String turno = Conecta4.getConecta4().getTablero().getTurno();
@@ -219,7 +225,7 @@ public class IU_juego extends JFrame implements Observer{
 										
 										if(j.getNum()==1){
 											lblJugador.setForeground(Color.BLUE);
-											System.out.println(j.getNombre() + " acaba de meter ficha");
+											//System.out.println(j.getNombre() + " acaba de meter ficha");
 											try {
 												color = ImageIO.read(getClass().getResource("../img/rojo.png"));
 												color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -230,7 +236,7 @@ public class IU_juego extends JFrame implements Observer{
 											
 										}else{
 											lblJugador.setForeground(Color.RED);
-											System.out.println(j.getNombre() + " acaba de meter ficha");
+											//System.out.println(j.getNombre() + " acaba de meter ficha");
 											try{
 												color = ImageIO.read(getClass().getResource("../img/azul.png"));
 												color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -252,7 +258,7 @@ public class IU_juego extends JFrame implements Observer{
 									
 									}else{
 										
-										System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
+										//System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
 										
 									}
 								}
@@ -312,10 +318,9 @@ public class IU_juego extends JFrame implements Observer{
 		*/
 	}
 	
-/*	private Timer iniciarTimer() {
+	private Timer iniciarTimer() {
 
 		cont = 0;
-
 		
 		if (timer == null) {
 			timer = new Timer(1000, new ActionListener() {
@@ -323,7 +328,7 @@ public class IU_juego extends JFrame implements Observer{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					cont++;
-					contadorTimer();
+					//contadorTimer();
 				}
 			});
 			timer.start();
@@ -331,7 +336,7 @@ public class IU_juego extends JFrame implements Observer{
 		return timer;
 	}
 
-	private void contadorTimer() {
+	/* private void contadorTimer() {
 
 	
 		int centenas = cont / 100;

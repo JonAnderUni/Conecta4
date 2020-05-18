@@ -306,7 +306,6 @@ public class IU_menu1 extends JFrame {
 			
 			btnJugar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					
 					if(rdbtn2Jugadores.isSelected()){
 						IU_2jugadores nombres = new IU_2jugadores();
 						setVisible(false);

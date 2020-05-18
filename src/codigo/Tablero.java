@@ -31,7 +31,7 @@ public class Tablero extends Observable{
 		this.ancho = pAncho;
 		this.alto = pAlto;
 		this.tablero = new Casilla[ancho][alto];
-		System.out.println("Se ha generado el tablero");
+		//System.out.println("Se ha generado el tablero");
 	}
 	
 	public Casilla getCasilla(int pAncho, int pAlto) {
@@ -440,7 +440,7 @@ public class Tablero extends Observable{
 		}
 		
 		if(pAlto==-1){
-			System.out.println("No puedes meter una ficha ahi");
+			//System.out.println("No puedes meter una ficha ahi");
 			
 		} else{
 
@@ -471,7 +471,7 @@ public class Tablero extends Observable{
 		int nuevoAlto = -1;
 		
 		if(columnaLlena(pAncho, pAlto)){
-			System.out.println("NO SE PUEDE METER LA FICHA");
+			//System.out.println("NO SE PUEDE METER LA FICHA");
 		}else{
 			nuevoAlto=5;
 			while(!encontrado){
