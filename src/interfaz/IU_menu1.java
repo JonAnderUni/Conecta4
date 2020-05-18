@@ -314,11 +314,17 @@ public class IU_menu1 extends JFrame {
 						
 						
 					}else if(rdbtnModoFacil.isSelected()){
-						
+						IU_1Jugador interfaz = new IU_1Jugador();
+						interfaz.ponerDificultad("FACIL");
+						setVisible(false);
+						interfaz.setVisible(true);
 						
 						
 					}else if(rdbtnModoDificil.isSelected()){
-						
+						IU_1Jugador interfaz = new IU_1Jugador();
+						interfaz.ponerDificultad("DIFICIL");
+						setVisible(false);
+						interfaz.setVisible(true);
 						
 						
 					}else{
