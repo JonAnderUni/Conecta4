@@ -139,7 +139,10 @@ public class IU_juego extends JFrame implements Observer{
 		
 	}
 	
-	
+	private void jugarTurno() {
+
+	}
+
 	private JPanel getPanelCentro() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -198,7 +201,6 @@ public class IU_juego extends JFrame implements Observer{
 								
 								if (e.getButton() == MouseEvent.BUTTON1) {
 									
-									//System.out.println("click izquierdo");
 									e.getSource();
 									
 									if(timer == null) {
@@ -206,7 +208,7 @@ public class IU_juego extends JFrame implements Observer{
 									}
 									
 									String cmd = etiqueta.getText();
-									//System.out.println(cmd);
+			
 									String splitXY = ",";
 									String[] data = cmd.split(splitXY);
 									
@@ -215,7 +217,6 @@ public class IU_juego extends JFrame implements Observer{
 									
 									int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
 									
-									//System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
 									
 									if(nuevoAlto!=-1){
 										//String turno = Conecta4.getConecta4().getTablero().getTurno();
@@ -224,6 +225,7 @@ public class IU_juego extends JFrame implements Observer{
 										Image color = null;
 										
 										if(j.getNum()==1){
+											
 											lblJugador.setForeground(Color.BLUE);
 											//System.out.println(j.getNombre() + " acaba de meter ficha");
 											try {

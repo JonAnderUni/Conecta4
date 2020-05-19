@@ -111,6 +111,7 @@ public class Tablero extends Observable{
 		tablero = null;
 	}
 	
+	
 	public void jugarTurno(Jugador j) {
 		if(j.getTipo().equals("FACIL")) {
 			turnoFacil();

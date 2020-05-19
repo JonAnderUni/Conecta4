@@ -114,9 +114,9 @@ public class IU_1Jugador extends JFrame {
 					Jugador persona = new Jugador(EnumTipo.USUARIO, getNJugador().getText(),1);
 					Jugador maquina;
 					if(level.equals("FACIL")) {
-						 maquina = new Jugador(EnumTipo.FACIL, "maquina", 2);
+						 maquina = new Jugador(EnumTipo.FACIL, "Maquina", 2);
 					}else {
-						 maquina = new Jugador(EnumTipo.DIFICIL, "maquina", 2);
+						 maquina = new Jugador(EnumTipo.DIFICIL, "Maquina", 2);
 					}
 					Conecta4.getConecta4().empezarPartida();
 					Conecta4.getConecta4().getTablero().setJugadores(persona, maquina);
