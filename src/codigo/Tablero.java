@@ -122,12 +122,12 @@ public class Tablero extends Observable{
 		}
 	}
 	
-	public void turnoFacil() {
+	public Casilla turnoFacil() {
 		int num = (int) (Math.random()*5);
-		rellenarCasilla(num);
+		return rellenarCasilla(num);
 	}
 	
-	public void rellenarCasilla(int columna) {
+	public Casilla rellenarCasilla(int columna) {
 		Boolean rellenado = false;
 		int cont = 0;
 		while(rellenado = false) {
@@ -147,9 +147,10 @@ public class Tablero extends Observable{
 				}
 			}
 		}
+		return tablero[columna][cont];
 	}
 	
-	public void turnoDificil() {
+	public Casilla turnoDificil() {
 		int mejorJugada, jugada, aux;
 		mejorJugada = 0;
 		jugada = 8;
@@ -160,6 +161,7 @@ public class Tablero extends Observable{
 				mejorJugada = aux;
 			}
 		}
+		return rellenarCasilla(mejorJugada);
 	}
 	
 	private int puntuacionJugada(int col) {
@@ -439,6 +441,14 @@ public class Tablero extends Observable{
 		return true;
 	}
 	
+	public void sacarUltimaFicha(int pAncho) {
+		//Saca la ultima ficha de la columna
+		for(int i = 0; i< tablero[0].length; i++) {
+			if(tablero[pAncho][i].getValor() != 0) {
+				tablero[pAncho][i].setValor(0);
+			}
+		}
+	}
 	
 	public int meterFicha(int pAncho, int pAlto){
 		

@@ -124,7 +124,7 @@ public class IU_1Jugador extends JFrame {
 					Conecta4.getConecta4().getTablero().iniciarPartida();
 					
 					IU_juego juego = new IU_juego();
-					
+					juego.setModo(level);
 
 					setVisible(false);
 					juego.setVisible(true);

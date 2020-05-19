@@ -139,8 +139,8 @@ public class IU_juego extends JFrame implements Observer{
 		
 	}
 	
-	private void jugarTurno() {
-
+	public void setModo(String m) {
+		modo = m;
 	}
 
 	private JPanel getPanelCentro() {
