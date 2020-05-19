@@ -164,9 +164,19 @@ public class Tablero extends Observable{
 	
 	private int puntuacionJugada(int col) {
 		Casilla[][]  tableroTemporal = tablero;//new Casilla[16][9]; 
-		
-		return 0;
-		
+		int puntuacion = 0;
+		if(hacer4EnRaya(tableroTemporal, col)) {
+			puntuacion = 15;
+		}else if(evitarVictoriaDelRival(tableroTemporal, col)) {
+			puntuacion = 14;
+		}else if(rival2FichasConHuecos2Lados(tableroTemporal, col)) {
+			puntuacion = 10;
+		}else if(IA2FichasSeguidas(tableroTemporal, col)) {
+			puntuacion = 8;
+		}else if(IA1ficha(tableroTemporal, col)) {
+			puntuacion = 5;
+		}
+		return puntuacion;
 	}
 	/*
 	 * puntuaciones posibles:
