@@ -157,7 +157,7 @@ public class Tablero extends Observable{
 		int mejorJugada, jugada, aux;
 		mejorJugada = 0;
 		jugada = 8;
-		for(int col = 1; col <= 9; col++) {
+		for(int col = 0; col <= 8; col++) {
 			aux = puntuacionJugada(col);
 			if(aux >= mejorJugada) {
 				jugada = col;
@@ -192,8 +192,8 @@ public class Tablero extends Observable{
 	 * --la ia tiene una ficha
 	 * */
 	private Boolean hacer4EnRaya(Casilla[][] t, int c) {
-		int aux = 1;
-		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
+		int aux = 0;
+		while ((t[c][aux].getValor() != 0) && (aux != 0)) {
 			aux++;
 		}
 		if(aux < 9) {
@@ -203,7 +203,7 @@ public class Tablero extends Observable{
 		
 	}
 	private Boolean evitarVictoriaDelRival(Casilla[][] t, int c) {
-		int aux = 1;
+		int aux = 0;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -212,10 +212,10 @@ public class Tablero extends Observable{
 		}
 		Boolean seEvita;
 		
-		return null;
+		return false;
 	}
 	private Boolean rival2FichasConHuecos2Lados(Casilla[][] t, int c) {
-		int aux = 1;
+		int aux = 0;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -246,7 +246,7 @@ public class Tablero extends Observable{
 		
 	}
 	private Boolean IA2FichasSeguidas(Casilla[][] t, int c) {
-		int aux = 1;
+		int aux = 0;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -287,7 +287,7 @@ public class Tablero extends Observable{
 		
 	}
 	private Boolean IA1ficha(Casilla[][] t, int c) {
-		int aux = 1;
+		int aux = 0;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -350,8 +350,8 @@ public class Tablero extends Observable{
 	public Boolean comprobarVictoria(Casilla[][] t) {
 		int cont = 0;
 		Boolean vict = false;
-		for(int col = 1; col <= 16; col++) {
-			for(int piso = 1; piso <= 9; piso++) {
+		for(int col = 0; col <= 8; col++) {
+			for(int piso = 0; piso <= 4; piso++) {
 				if((t[col][piso].getValor() != 0) && (ganador == null)) {
 					comprobarHorizontal(t, col, piso);
 					comprobarVertical(t, col, piso);
@@ -372,7 +372,7 @@ public class Tablero extends Observable{
 	private Boolean comprobarHorizontal(Casilla[][] t, int col, int piso) {
 		int cont = 1;
 		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((col < 16) && (cont < 4)) {
+		while((col < 9) && (cont < 4)) {
 			col++;
 			if(t[col][piso].getValor() == jug) {
 				cont++;
@@ -390,7 +390,7 @@ public class Tablero extends Observable{
 	private Boolean comprobarVertical(Casilla[][] t, int col, int piso) {
 		int cont = 1;
 		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((piso < 9) && (cont < 4)) {
+		while((piso < 5) && (cont < 4)) {
 			piso++;
 			if(t[col][piso].getValor() == jug) {
 				cont++;
@@ -408,7 +408,7 @@ public class Tablero extends Observable{
 	private Boolean comprobarDiagUp(Casilla[][] t, int col, int piso) {
 		int cont = 1;
 		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((piso < 9) && (col < 16) && (cont < 4)) {
+		while((piso < 5) && (col < 9) && (cont < 4)) {
 			piso++;
 			col++;
 			if(t[col][piso].getValor() == jug) {
@@ -427,7 +427,7 @@ public class Tablero extends Observable{
 	private Boolean comprobarDiagDown(Casilla[][] t, int col, int piso) {
 		int cont = 1;
 		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((piso > 0) && (col < 16) && (cont < 4)) {
+		while((piso > 0) && (col < 9) && (cont < 4)) {
 			piso--;
 			col++;
 			if(t[col][piso].getValor() == jug) {

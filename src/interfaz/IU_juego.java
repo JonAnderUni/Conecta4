@@ -58,7 +58,7 @@ public class IU_juego extends JFrame implements Observer{
 	private final JLabel lblJugador = new JLabel();
 	
 	
-	private String modo;
+	private String modo = "";
 	private int cont;
 	private Timer timer;
 
@@ -248,7 +248,7 @@ public class IU_juego extends JFrame implements Observer{
 												nuevoAlto = c.getPosY();
 											}else if(modo.equals("DIFICIL")) {
 												Conecta4.getConecta4().getTablero().sacarUltimaFicha(ancho);
-												Casilla c = Conecta4.getConecta4().getTablero().turnoFacil();
+												Casilla c = Conecta4.getConecta4().getTablero().turnoDificil();
 												ancho = c.getPosX();
 												nuevoAlto = c.getPosY();
 											}
