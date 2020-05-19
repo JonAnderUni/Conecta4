@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
+import codigo.Casilla;
 import codigo.Conecta4;
 import codigo.Jugador;
 import codigo.Tablero;
@@ -239,6 +240,18 @@ public class IU_juego extends JFrame implements Observer{
 										}else{
 											lblJugador.setForeground(Color.RED);
 											//System.out.println(j.getNombre() + " acaba de meter ficha");
+											
+											if(modo.equals("FACIL")) {
+												Conecta4.getConecta4().getTablero().sacarUltimaFicha(ancho);
+												Casilla c = Conecta4.getConecta4().getTablero().turnoFacil();
+												ancho = c.getPosX();
+												nuevoAlto = c.getPosY();
+											}else if(modo.equals("DIFICIL")) {
+												Conecta4.getConecta4().getTablero().sacarUltimaFicha(ancho);
+												Casilla c = Conecta4.getConecta4().getTablero().turnoFacil();
+												ancho = c.getPosX();
+												nuevoAlto = c.getPosY();
+											}
 											try{
 												color = ImageIO.read(getClass().getResource("../img/azul.png"));
 												color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);

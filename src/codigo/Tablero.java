@@ -3,6 +3,7 @@ package codigo;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.Observable;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -123,14 +124,16 @@ public class Tablero extends Observable{
 	}
 	
 	public Casilla turnoFacil() {
-		int num = (int) (Math.random()*5);
+		Random random = new Random();
+		
+		int num = (int) (random.nextInt(9));
 		return rellenarCasilla(num);
 	}
 	
 	public Casilla rellenarCasilla(int columna) {
 		Boolean rellenado = false;
 		int cont = 0;
-		while(rellenado = false) {
+		while(rellenado == false) {
 			while(rellenado == false) {
 				if(tablero[columna][cont].getValor() != 0) {
 					cont++;
@@ -140,14 +143,14 @@ public class Tablero extends Observable{
 				}
 			}
 			if(rellenado == false) {
-				if(columna == 5) {
+				if(columna == 8) {
 					columna = 0;
 				}else {
 					columna++;
 				}
 			}
 		}
-		return tablero[columna][cont];
+		return tablero[columna][5-cont];
 	}
 	
 	public Casilla turnoDificil() {
