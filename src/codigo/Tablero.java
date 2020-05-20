@@ -16,7 +16,8 @@ public class Tablero extends Observable{
 	private Jugador j2;
 	//private Jugador ultimoTurno;
 	private Jugador turnoActual;
-	private int CVacias = 0;
+	private int CVacias = 54;
+	private int Rank = 0;
 	private Jugador ganador = null;
 	private static Tablero mTablero;
 	private String idioma = "Castellano";
@@ -411,6 +412,7 @@ public class Tablero extends Observable{
 		CVacias = cont;
 		if((ganador != null)) {	//|| (CVacias == 0)) {
 			vict = true;
+			Rank = calcularPuntuacionRanking();
 			System.out.println("HAS GANADO");
 		}
 		return vict;
@@ -958,6 +960,11 @@ public class Tablero extends Observable{
 		}
 
 		return nuevoAlto;
+	}
+	
+	public int calcularPuntuacionRanking() {
+		int p = CVacias * 18;
+		return p;
 	}
 	
 	public void iniciarPartida() {
