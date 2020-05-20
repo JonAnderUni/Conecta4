@@ -18,10 +18,10 @@ public class DirectorTablero {
 
 
 	public Tablero generarTablero() {
-		//System.out.println("Holaaa");
+		System.out.println("Holaaa");
 		tablero = new Tablero(9, 6);
 		//Tablero tablero = new Tablero(9, 6);
-		//System.out.println("HOLAAAA2");
+		System.out.println("HOLAAAA2");
 		return tablero;
 		
 	}

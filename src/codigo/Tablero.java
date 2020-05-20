@@ -3,7 +3,6 @@ package codigo;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.Observable;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -32,7 +31,7 @@ public class Tablero extends Observable{
 		this.ancho = pAncho;
 		this.alto = pAlto;
 		this.tablero = new Casilla[ancho][alto];
-		//System.out.println("Se ha generado el tablero");
+		System.out.println("Se ha generado el tablero");
 	}
 	
 	public Casilla getCasilla(int pAncho, int pAlto) {
@@ -57,6 +56,10 @@ public class Tablero extends Observable{
 		return this.tablero;
 	}
 */
+	
+	public Casilla[][] getT(){
+		return this.tablero;
+	}
 	
 	public Jugador getJugador1(){
 		return j1;
@@ -112,7 +115,6 @@ public class Tablero extends Observable{
 		tablero = null;
 	}
 	
-	
 	public void jugarTurno(Jugador j) {
 		if(j.getTipo().equals("FACIL")) {
 			turnoFacil();
@@ -123,65 +125,73 @@ public class Tablero extends Observable{
 		}
 	}
 	
-	public Casilla turnoFacil() {
-		Random random = new Random();
+	public int[] turnoFacil() {
+		int num = (int) (Math.random()*9);
+		int[] r = new int[2];
+		r = rellenarCasilla(num);
 		
-		int num = (int) (random.nextInt(9));
-		return rellenarCasilla(num);
+		return r;
 	}
 	
-	public Casilla rellenarCasilla(int columna) {
+	public int[] rellenarCasilla(int columna) {
 		Boolean rellenado = false;
-		int cont = 0;
-		while(rellenado == false) {
-			while(rellenado == false) {
-				if(tablero[columna][cont].getValor() != 0) {
+		int cont = 5;		//fila
+		
+		while(!rellenado) {
+			
+			//Bajamos la ficha hasta donde podamos
+			if(tablero[columna][cont].getC()!=0){		//Ya habia una ficha ahi
+				cont--;
+			}else{
+				tablero[columna][cont].setC(2);
+				rellenado=true;
+				}
+		}
+			
+	/*		while(rellenado == false) {
+				if(tablero[columna][cont].getC() != 0) {
 					cont++;
 				}else {
-					tablero[columna][cont].setValor(1);
+					tablero[columna][cont].setC(2);
 					rellenado = true;
 				}
 			}
 			if(rellenado == false) {
-				if(columna == 8) {
+				if(columna == 5) {
 					columna = 0;
 				}else {
 					columna++;
 				}
-			}
-		}
-		return tablero[columna][5-cont];
+			}*/
+	
+		
+		int x = 0;
+		int[] resultado = new int[2];
+		resultado[x]=columna;
+		resultado[x+1]=cont;
+		
+		return resultado;
+		
 	}
 	
-	public Casilla turnoDificil() {
+	public void turnoDificil() {
 		int mejorJugada, jugada, aux;
 		mejorJugada = 0;
 		jugada = 8;
-		for(int col = 0; col <= 8; col++) {
+		for(int col = 1; col <= 9; col++) {
 			aux = puntuacionJugada(col);
 			if(aux >= mejorJugada) {
 				jugada = col;
 				mejorJugada = aux;
 			}
 		}
-		return rellenarCasilla(mejorJugada);
 	}
 	
 	private int puntuacionJugada(int col) {
 		Casilla[][]  tableroTemporal = tablero;//new Casilla[16][9]; 
-		int puntuacion = 0;
-		if(hacer4EnRaya(tableroTemporal, col)) {
-			puntuacion = 15;
-		}else if(evitarVictoriaDelRival(tableroTemporal, col)) {
-			puntuacion = 14;
-		}else if(rival2FichasConHuecos2Lados(tableroTemporal, col)) {
-			puntuacion = 10;
-		}else if(IA2FichasSeguidas(tableroTemporal, col)) {
-			puntuacion = 8;
-		}else if(IA1ficha(tableroTemporal, col)) {
-			puntuacion = 5;
-		}
-		return puntuacion;
+		
+		return 0;
+		
 	}
 	/*
 	 * puntuaciones posibles:
@@ -191,19 +201,19 @@ public class Tablero extends Observable{
 	 * --la ia tiene 2 fichas seguidas
 	 * --la ia tiene una ficha
 	 * */
-	private Boolean hacer4EnRaya(Casilla[][] t, int c) {
-		int aux = 0;
-		while ((t[c][aux].getValor() != 0) && (aux != 0)) {
+	private Boolean hacer4EnRaya(int c) {
+		int aux = 1;
+		while ((tablero[c][aux].getC() != 0) && (aux != 1)) {
 			aux++;
 		}
 		if(aux < 9) {
-			t[c][aux].setValor(1);
+			tablero[c][aux].setC(1);
 		}
-		return comprobarVictoria(t);
+		return comprobarVictoria();
 		
 	}
 	private Boolean evitarVictoriaDelRival(Casilla[][] t, int c) {
-		int aux = 0;
+		int aux = 1;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -212,10 +222,10 @@ public class Tablero extends Observable{
 		}
 		Boolean seEvita;
 		
-		return false;
+		return null;
 	}
 	private Boolean rival2FichasConHuecos2Lados(Casilla[][] t, int c) {
-		int aux = 0;
+		int aux = 1;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -246,7 +256,7 @@ public class Tablero extends Observable{
 		
 	}
 	private Boolean IA2FichasSeguidas(Casilla[][] t, int c) {
-		int aux = 0;
+		int aux = 1;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -287,7 +297,7 @@ public class Tablero extends Observable{
 		
 	}
 	private Boolean IA1ficha(Casilla[][] t, int c) {
-		int aux = 0;
+		int aux = 1;
 		while ((t[c][aux].getValor() != 0) && (aux != 1)) {
 			aux++;
 		}
@@ -347,111 +357,549 @@ public class Tablero extends Observable{
 		rellenarCasilla(boton);
 	}
 	
-	public Boolean comprobarVictoria(Casilla[][] t) {
-		int cont = 0;
-		Boolean vict = false;
-		for(int col = 0; col <= 8; col++) {
-			for(int piso = 0; piso <= 4; piso++) {
-				if((t[col][piso].getValor() != 0) && (ganador == null)) {
-					comprobarHorizontal(t, col, piso);
-					comprobarVertical(t, col, piso);
-					comprobarDiagUp(t, col, piso);
-					comprobarDiagDown(t, col, piso);
-				}else if(t[col][piso].getValor() == 0) {
-					cont++;
+	
+	
+	public boolean hayGanador(){
+		if(ganador!=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public Jugador getGanador(){
+		return ganador;
+	}
+	
+	public int getFichasMetidas(){
+		int x = 0;
+		
+		for(int fila = 0; fila < 6; fila ++){
+			for(int columna = 0; columna < 9; columna ++){
+				if(tablero[columna][fila].getC()!=0){
+					x ++;
 				}
 			}
 		}
+		
+		return x;
+		
+	}
+	
+	
+	public Boolean comprobarVictoria() {
+		int cont = 0;
+		Boolean vict = false;
+		if(getFichasMetidas()>6){
+		//	for(int col = 0; col <9; col++) {
+		//		for(int piso = 0; piso <6; piso++) {
+		//			if((tablero[col][piso].getC() != 0) && (ganador == null)) {
+		//				System.out.println(col + ", " + piso);
+						comprobarHorizontal();
+						comprobarVertical();
+						comprobarDiagonalUp();
+						comprobarDiagonalDown();
+						//comprobarDiagUp(t, col, piso);
+						//comprobarDiagDown(t, col, piso);
+		//			}else if(tablero[col][piso].getC() == 0) {
+		//				cont++;
+		//			}
+		//		}
+		//	}
+		}
+		
 		CVacias = cont;
-		if((ganador != null) || (CVacias == 0)) {
+		if((ganador != null)) {	//|| (CVacias == 0)) {
 			vict = true;
+			System.out.println("HAS GANADO");
 		}
 		return vict;
 	}
 	
-	private Boolean comprobarHorizontal(Casilla[][] t, int col, int piso) {
-		int cont = 1;
-		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((col < 9) && (cont < 4)) {
-			col++;
-			if(t[col][piso].getValor() == jug) {
-				cont++;
-			}else {
-				return false;
-			}
-		}
-		if(jug == 1) {
-			ganador = j1;
-		}else {
-			ganador = j2;
-		}
-		return true;
-	}
-	private Boolean comprobarVertical(Casilla[][] t, int col, int piso) {
-		int cont = 1;
-		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((piso < 5) && (cont < 4)) {
-			piso++;
-			if(t[col][piso].getValor() == jug) {
-				cont++;
-			}else {
-				return false;
-			}
-		}
-		if(jug == 1) {
-			ganador = j1;
-		}else {
-			ganador = j2;
-		}		
-		return true;
-	}
-	private Boolean comprobarDiagUp(Casilla[][] t, int col, int piso) {
-		int cont = 1;
-		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((piso < 5) && (col < 9) && (cont < 4)) {
-			piso++;
-			col++;
-			if(t[col][piso].getValor() == jug) {
-				cont++;
-			}else {
-				return false;
-			}
-		}
-		if(jug == 1) {
-			ganador = j1;
-		}else {
-			ganador = j2;
-		}		
-		return true;
-	}
-	private Boolean comprobarDiagDown(Casilla[][] t, int col, int piso) {
-		int cont = 1;
-		int jug;if(t[col][piso].getValor() == 1) { jug = 1;}else {jug = 2;}
-		while((piso > 0) && (col < 9) && (cont < 4)) {
-			piso--;
-			col++;
-			if(t[col][piso].getValor() == jug) {
-				cont++;
-			}else {
-				return false;
-			}
-		}
-		if(jug == 1) {
-			ganador = j1;
-		}else {
-			ganador = j2;
-		}		
-		return true;
+	//////////////////////////////////////////
+	
+	private boolean comprobarHorizontal(){
+		boolean victoria = false;
+		int[] linea = new int[9];
+		
+		for (int fila = 0; fila < alto; fila++) {
+            for (int columna = 0; columna < ancho; columna++) {
+                linea[columna] = tablero[columna][fila].getC();
+            }
+            if (comprobarLinea(linea)) {
+            	System.out.println("h");
+            	if(turnoActual.getNum()==1){
+					ganador=j2;
+				}else{
+					ganador=j1;
+				}
+                return true;
+                
+            }
+
+            resetVector(linea);
+        }
+		
+		
+		return victoria;
 	}
 	
-	public void sacarUltimaFicha(int pAncho) {
-		//Saca la ultima ficha de la columna
-		for(int i = 0; i< tablero[0].length; i++) {
-			if(tablero[pAncho][i].getValor() != 0) {
-				tablero[pAncho][i].setValor(0);
+	
+	
+	
+	private boolean comprobarVertical(){
+		boolean victoria = false;
+		int[] linea = new int[6];
+		
+		for (int columna = 0; columna < ancho; columna++) {
+			for (int fila = 0; fila < alto; fila++){
+				linea[fila] = tablero[columna][fila].getC();
 			}
-		}
+	        
+			if (comprobarLinea(linea)) {
+				System.out.println("v");
+				if(turnoActual.getNum()==1){
+					ganador=j2;
+				}else{
+					ganador=j1;
+				}
+				return true;
+	        }
+        }
+		
+		
+		return victoria;
 	}
+	
+	
+	
+	
+	public boolean comprobarDiagonalUp(){
+		boolean victoria = false;
+		
+		//Empezamos por la fila 3
+		int[] linea = new int[4];
+		int x = 0;
+		int fila = 3;
+		int columna = 0;
+		
+		while(columna < 4 && fila > -1){
+			linea[x]=tablero[columna][fila].getC();
+			x++;
+			columna ++;
+			fila --;
+		}
+		
+		if (comprobarLinea(linea)) {
+				System.out.println("d");
+				if(turnoActual.getNum()==1){
+					ganador=j2;
+				}else{
+					ganador=j1;
+				}
+				return true;
+				
+		}else{
+			x=0;
+			linea = new int[5];
+			fila = 4;
+			columna = 0;
+			
+			while(columna < 5 && fila > -1){
+				linea[x]=tablero[columna][fila].getC();
+				x++;
+				columna ++;
+				fila --;
+			}
+			
+			if (comprobarLinea(linea)) {
+					System.out.println("d");
+					if(turnoActual.getNum()==1){
+						ganador=j2;
+					}else{
+						ganador=j1;
+					}
+					return true;
+			
+			}else{
+				x=0;
+				linea = new int[6];
+				fila = 5;
+				columna = 0;
+				
+				while(columna < 6 && fila > -1){
+					linea[x]=tablero[columna][fila].getC();
+					x++;
+					columna ++;
+					fila --;
+				}
+				
+				if (comprobarLinea(linea)) {
+						System.out.println("d");
+						if(turnoActual.getNum()==1){
+							ganador=j2;
+						}else{
+							ganador=j1;
+						}
+						return true;
+				
+				}else{
+					x=0;
+					linea = new int[6];
+					fila = 5;
+					columna = 1;
+					
+					while(columna < 7 && fila > -1){
+						linea[x]=tablero[columna][fila].getC();
+						x++;
+						columna ++;
+						fila --;
+					}
+					
+					if (comprobarLinea(linea)) {
+							System.out.println("d");
+							if(turnoActual.getNum()==1){
+								ganador=j2;
+							}else{
+								ganador=j1;
+							}
+							return true;
+					
+					}else{
+						x=0;
+						linea = new int[6];
+						fila = 5;
+						columna = 2;
+						
+						while(columna < 8 && fila > -1){
+							linea[x]=tablero[columna][fila].getC();
+							x++;
+							columna ++;
+							fila --;
+						}
+						
+						if (comprobarLinea(linea)) {
+								System.out.println("d");
+								if(turnoActual.getNum()==1){
+									ganador=j2;
+								}else{
+									ganador=j1;
+								}
+								return true;
+						
+						}else{
+							x=0;
+							linea = new int[6];
+							fila = 5;
+							columna = 3;
+							
+							while(columna < 9 && fila > -1){
+								linea[x]=tablero[columna][fila].getC();
+								x++;
+								columna ++;
+								fila --;
+							}
+							
+							if (comprobarLinea(linea)) {
+									System.out.println("d");
+									if(turnoActual.getNum()==1){
+										ganador=j2;
+									}else{
+										ganador=j1;
+									}
+									return true;
+							
+							
+							} else{
+								x=0;
+								linea = new int[5];
+								fila = 5;
+								columna = 4;
+								
+								while(columna < 9 && fila > 0){
+									linea[x]=tablero[columna][fila].getC();
+									x++;
+									columna ++;
+									fila --;
+								}
+								
+								if (comprobarLinea(linea)) {
+										System.out.println("d");
+										if(turnoActual.getNum()==1){
+											ganador=j2;
+										}else{
+											ganador=j1;
+										}
+										return true;
+								
+								}else{
+									x=0;
+									linea = new int[4];
+									fila = 5;
+									columna = 5;
+									
+									while(columna < 9 && fila > 1){
+										linea[x]=tablero[columna][fila].getC();
+										x++;
+										columna ++;
+										fila --;
+									}
+									
+									if (comprobarLinea(linea)) {
+											System.out.println("d");
+											if(turnoActual.getNum()==1){
+												ganador=j2;
+											}else{
+												ganador=j1;
+											}
+											return true;
+									
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+		return victoria;
+	}
+	
+	
+	public boolean comprobarDiagonalDown(){
+		boolean victoria = false;
+		
+		//Empezamos por la fila 3
+		int[] linea = new int[4];
+		int x = 0;
+		int fila = 2;
+		int columna = 0;
+		
+		while(columna < 4 && fila < 6){
+			linea[x]=tablero[columna][fila].getC();
+			x++;
+			columna ++;
+			fila ++;
+		}
+		
+		if (comprobarLinea(linea)) {
+				System.out.println("d");
+				if(turnoActual.getNum()==1){
+					ganador=j2;
+				}else{
+					ganador=j1;
+				}
+				return true;
+				
+		}else{
+			x=0;
+			linea = new int[5];
+			fila = 1;
+			columna = 0;
+			
+			while(columna < 5 && fila < 6){
+				linea[x]=tablero[columna][fila].getC();
+				x++;
+				columna ++;
+				fila ++;
+			}
+			
+			if (comprobarLinea(linea)) {
+					System.out.println("d");
+					if(turnoActual.getNum()==1){
+						ganador=j2;
+					}else{
+						ganador=j1;
+					}
+					return true;
+			
+			}else{
+				x=0;
+				linea = new int[6];
+				fila = 0;
+				columna = 0;
+				
+				while(columna < 6 && fila < 6){
+					linea[x]=tablero[columna][fila].getC();
+					x++;
+					columna ++;
+					fila ++;
+				}
+				
+				if (comprobarLinea(linea)) {
+						System.out.println("d");
+						if(turnoActual.getNum()==1){
+							ganador=j2;
+						}else{
+							ganador=j1;
+						}
+						return true;
+				
+				}else{
+					x=0;
+					linea = new int[6];
+					fila = 0;
+					columna = 1;
+					
+					while(columna < 7 && fila < 6){
+						linea[x]=tablero[columna][fila].getC();
+						x++;
+						columna ++;
+						fila ++;
+					}
+					
+					if (comprobarLinea(linea)) {
+							System.out.println("d");
+							if(turnoActual.getNum()==1){
+								ganador=j2;
+							}else{
+								ganador=j1;
+							}
+							return true;
+					
+					}else{
+						x=0;
+						linea = new int[6];
+						fila = 0;
+						columna = 2;
+						
+						while(columna < 8 && fila < 6){
+							linea[x]=tablero[columna][fila].getC();
+							x++;
+							columna ++;
+							fila ++;
+						}
+						
+						if (comprobarLinea(linea)) {
+								System.out.println("d");
+								if(turnoActual.getNum()==1){
+									ganador=j2;
+								}else{
+									ganador=j1;
+								}
+								return true;
+						
+						}else{
+							x=0;
+							linea = new int[6];
+							fila = 0;
+							columna = 3;
+							
+							while(columna < 9 && fila < 6){
+								linea[x]=tablero[columna][fila].getC();
+								x++;
+								columna ++;
+								fila ++;
+							}
+							
+							if (comprobarLinea(linea)) {
+									System.out.println("d");
+									if(turnoActual.getNum()==1){
+										ganador=j2;
+									}else{
+										ganador=j1;
+									}
+									return true;
+							
+							
+							} else{
+								x=0;
+								linea = new int[5];
+								fila = 0;
+								columna = 4;
+								
+								while(columna < 9 && fila < 5){
+									linea[x]=tablero[columna][fila].getC();
+									x++;
+									columna ++;
+									fila ++;
+								}
+								
+								if (comprobarLinea(linea)) {
+										System.out.println("d");
+										if(turnoActual.getNum()==1){
+											ganador=j2;
+										}else{
+											ganador=j1;
+										}
+										return true;
+								
+								}else{
+									x=0;
+									linea = new int[4];
+									fila = 0;
+									columna = 5;
+									
+									while(columna < 9 && fila < 4){
+										linea[x]=tablero[columna][fila].getC();
+										x++;
+										columna ++;
+										fila ++;
+									}
+									
+									if (comprobarLinea(linea)) {
+											System.out.println("d");
+											if(turnoActual.getNum()==1){
+												ganador=j2;
+											}else{
+												ganador=j1;
+											}
+											return true;
+									
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+		return victoria;
+	}
+	
+	
+
+	
+	
+	private void resetVector(int[] vector) {
+        for (int it = 0; it < vector.length; it++) //Resetea vector
+        {
+            vector[it] = 0;
+        }
+    }
+	
+	private boolean comprobarLinea(int[] linea){
+		int contador = 0;
+        if (linea[0] != 0) {
+            contador = 1;
+        }
+        for (int it = 1; it < linea.length; it++) {
+            if (linea[it] != 0 && linea[it] == linea[it - 1]) {
+                contador++;
+                if (contador == 4) {
+                    return true;
+                }
+            } else if (linea[it] != 0) {
+                contador = 1;
+            } else {
+                contador = 0;
+            }
+        }
+        return false;
+	}
+	
+	//////////////////////////////////////////
+
+	
+		
 	
 	public int meterFicha(int pAncho, int pAlto){
 		
@@ -464,7 +912,7 @@ public class Tablero extends Observable{
 		}
 		
 		if(pAlto==-1){
-			//System.out.println("No puedes meter una ficha ahi");
+			System.out.println("No puedes meter una ficha ahi");
 			
 		} else{
 
@@ -495,7 +943,7 @@ public class Tablero extends Observable{
 		int nuevoAlto = -1;
 		
 		if(columnaLlena(pAncho, pAlto)){
-			//System.out.println("NO SE PUEDE METER LA FICHA");
+			System.out.println("NO SE PUEDE METER LA FICHA");
 		}else{
 			nuevoAlto=5;
 			while(!encontrado){
