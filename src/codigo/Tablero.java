@@ -409,11 +409,20 @@ public class Tablero extends Observable{
 		//	}
 		}
 		
-		CVacias = cont;
+		
 		if((ganador != null)) {	//|| (CVacias == 0)) {
 			vict = true;
 			Rank = calcularPuntuacionRanking();
 			System.out.println("HAS GANADO");
+		}else {
+			for(int i = 0; i < tablero.length; i++) {
+				for(int j = 0; j < tablero[i].length; j++) {
+					if(tablero[i][j].getValor() == 0) {
+						cont++;
+					}
+				}
+			}
+			CVacias = 0;	
 		}
 		return vict;
 	}
