@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
-import codigo.Casilla;
 import codigo.Conecta4;
 import codigo.Jugador;
 import codigo.Tablero;
@@ -59,8 +58,8 @@ public class IU_juego extends JFrame implements Observer{
 	
 	
 	private String modo = "";
-	private int cont;
-	private Timer timer;
+	
+	private boolean fin = false;
 
 	
 	
@@ -74,7 +73,7 @@ public class IU_juego extends JFrame implements Observer{
 					IU_juego frame = new IU_juego();
 					frame.setVisible(true);
 					
-					//System.out.println("El jugador 1 es " + Conecta4.getConecta4().getTablero().getJugador1().getNombre());
+					System.out.println("El jugador 1 es " + Conecta4.getConecta4().getTablero().getJugador1().getNombre());
 					
 			/*		System.out.println("EMPEZAMOS");
 					Conecta4.getConecta4().empezarPartida();
@@ -140,10 +139,7 @@ public class IU_juego extends JFrame implements Observer{
 		
 	}
 	
-	public void setModo(String m) {
-		modo = m;
-	}
-
+	
 	private JPanel getPanelCentro() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -200,87 +196,173 @@ public class IU_juego extends JFrame implements Observer{
 						public void mouseClicked(MouseEvent e) {
 							if (e.getClickCount() == 1) {
 								
-								if (e.getButton() == MouseEvent.BUTTON1) {
-									
-									e.getSource();
-									
-									if(timer == null) {
-										iniciarTimer();
-									}
-									
-									String cmd = etiqueta.getText();
-			
-									String splitXY = ",";
-									String[] data = cmd.split(splitXY);
-									
-									int ancho = Integer.parseInt(data[0]);
-									int alto = Integer.parseInt(data[1]);
-									
-									int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
+								if (e.getButton() == MouseEvent.BUTTON1 && !fin) {
 									
 									
-									if(nuevoAlto!=-1){
-										//String turno = Conecta4.getConecta4().getTablero().getTurno();
-										Jugador j = Conecta4.getConecta4().getTablero().getTurnoActual();
-	
-										Image color = null;
+									if(modo.equals("USUARIO")){
 										
-										if(j.getNum()==1){
+										System.out.println("click izquierdo");
+										e.getSource();
+										
+										String cmd = etiqueta.getText();
+										System.out.println(cmd);
+										String splitXY = ",";
+										String[] data = cmd.split(splitXY);
+										
+										int ancho = Integer.parseInt(data[0]);
+										int alto = Integer.parseInt(data[1]);
+										
+										int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
+										
+										System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
+										
+										if(nuevoAlto!=-1){
+											//String turno = Conecta4.getConecta4().getTablero().getTurno();
+											Jugador j = Conecta4.getConecta4().getTablero().getTurnoActual();
+		
+											Image color = null;
 											
-											lblJugador.setForeground(Color.BLUE);
-											//System.out.println(j.getNombre() + " acaba de meter ficha");
-											try {
-												color = ImageIO.read(getClass().getResource("../img/rojo.png"));
-												color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-	
-												} catch (IOException e1) {
+											if(j.getNum()==1){
+												lblJugador.setForeground(Color.BLUE);
+												System.out.println(j.getNombre() + " acaba de meter ficha");
+												try {
+													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
+													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		
+													} catch (IOException e1) {
+														e1.printStackTrace();
+													}
+												
+											}else{
+												lblJugador.setForeground(Color.RED);
+												System.out.println(j.getNombre() + " acaba de meter ficha");
+												try{
+													color = ImageIO.read(getClass().getResource("../img/azul.png"));
+													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		
+												} catch(IOException e1){
 													e1.printStackTrace();
 												}
-											
-										}else{
-											lblJugador.setForeground(Color.RED);
-											//System.out.println(j.getNombre() + " acaba de meter ficha");
-											
-											if(modo.equals("FACIL")) {
-												Conecta4.getConecta4().getTablero().sacarUltimaFicha(ancho);
-												Casilla c = Conecta4.getConecta4().getTablero().turnoFacil();
-												ancho = c.getPosX();
-												nuevoAlto = c.getPosY();
-											}else if(modo.equals("DIFICIL")) {
-												Conecta4.getConecta4().getTablero().sacarUltimaFicha(ancho);
-												Casilla c = Conecta4.getConecta4().getTablero().turnoDificil();
-												ancho = c.getPosX();
-												nuevoAlto = c.getPosY();
 											}
-											try{
-												color = ImageIO.read(getClass().getResource("../img/azul.png"));
-												color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+											
+											botones[ancho][nuevoAlto].setIcon(new ImageIcon(color));
 	
-											} catch(IOException e1){
-												e1.printStackTrace();
+											
+	
+											
+											Conecta4.getConecta4().getTablero().cambiarTurno();
+											Jugador turnoActual = Conecta4.getConecta4().getTablero().getTurnoActual();
+											
+											lblJugador.setText(turnoActual.getNombre());
+											Conecta4.getConecta4().getTablero().comprobarVictoria();
+											if(Conecta4.getConecta4().getTablero().hayGanador()){
+												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
+												System.out.println("Ha ganado " + ganador.getNombre());
+												fin = true;
 											}
+											
+											
+											
+										
+										}else{
+											
+											System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
+											
+										}
+								/////////////////////////////////////////////////
+										
+									}else if(modo.equals("FACIL")){
+										
+										System.out.println("ESTAS EN MODO FACIL");
+										System.out.println("click izquierdo");
+										e.getSource();
+										
+										String cmd = etiqueta.getText();
+										System.out.println(cmd);
+										String splitXY = ",";
+										String[] data = cmd.split(splitXY);
+										
+										int ancho = Integer.parseInt(data[0]);
+										int alto = Integer.parseInt(data[1]);
+										
+										int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
+										
+										System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
+										
+										if(nuevoAlto!=-1){
+											//String turno = Conecta4.getConecta4().getTablero().getTurno();
+											Jugador j = Conecta4.getConecta4().getTablero().getTurnoActual();
+		
+											Image color = null;
+											
+											
+												//lblJugador.setForeground(Color.BLUE);
+												System.out.println(j.getNombre() + " acaba de meter ficha");
+												try {
+													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
+													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		
+													} catch (IOException e1) {
+														e1.printStackTrace();
+													}
+												
+											
+											
+											botones[ancho][nuevoAlto].setIcon(new ImageIcon(color));
+	
+											
+											
+											
+											Conecta4.getConecta4().getTablero().cambiarTurno();
+											Jugador turnoActual = Conecta4.getConecta4().getTablero().getTurnoActual();
+											
+											lblJugador.setText(Conecta4.getConecta4().getTablero().getJugador1().getNombre());
+											Conecta4.getConecta4().getTablero().comprobarVictoria();
+											if(Conecta4.getConecta4().getTablero().hayGanador()){
+												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
+												System.out.println("Ha ganado " + ganador.getNombre());
+												fin = true;
+											}
+											
+											
+											
+										
+										}else{
+											
+											System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
+											
 										}
 										
-										botones[ancho][nuevoAlto].setIcon(new ImageIcon(color));
-
+										
+										int[] resultado = Conecta4.getConecta4().getTablero().turnoFacil();
+										System.out.println(resultado[0]);
+										System.out.println(resultado[1]);
 										
 										Conecta4.getConecta4().getTablero().cambiarTurno();
-										Jugador turnoActual = Conecta4.getConecta4().getTablero().getTurnoActual();
+										Image color = null;
 										
-										lblJugador.setText(turnoActual.getNombre());
 										
+										try {
+											color = ImageIO.read(getClass().getResource("../img/azul.png"));
+											color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+
+											} catch (IOException e1) {
+												e1.printStackTrace();
+											}
 										
 									
-									}else{
+									
+									botones[resultado[0]][resultado[1]].setIcon(new ImageIcon(color));
+
 										
-										//System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
 										
 									}
+									
+								////////////////////////////////////////////////////////
 								}
 									
-									
-								
-							}
+								}
+							
 						}
 					});
 			
@@ -291,6 +373,10 @@ public class IU_juego extends JFrame implements Observer{
 		return panel;
 	}
 	
+	
+	public void setModo(String m) {
+		modo = m;
+	}
 	
 	
 	/*
@@ -333,9 +419,10 @@ public class IU_juego extends JFrame implements Observer{
 		*/
 	}
 	
-	private Timer iniciarTimer() {
+/*	private Timer iniciarTimer() {
 
 		cont = 0;
+
 		
 		if (timer == null) {
 			timer = new Timer(1000, new ActionListener() {
@@ -343,7 +430,7 @@ public class IU_juego extends JFrame implements Observer{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					cont++;
-					//contadorTimer();
+					contadorTimer();
 				}
 			});
 			timer.start();
@@ -351,7 +438,7 @@ public class IU_juego extends JFrame implements Observer{
 		return timer;
 	}
 
-	/* private void contadorTimer() {
+	private void contadorTimer() {
 
 	
 		int centenas = cont / 100;

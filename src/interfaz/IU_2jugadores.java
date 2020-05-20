@@ -108,6 +108,7 @@ public class IU_2jugadores extends JDialog {
 						Conecta4.getConecta4().getTablero().iniciarPartida();
 						
 						IU_juego juego = new IU_juego();
+						juego.setModo("USUARIO");
 						
 
 						setVisible(false);

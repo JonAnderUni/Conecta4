@@ -300,12 +300,14 @@ public class IU_menu1 extends JFrame {
 	}
 	private JButton getBtnJugar() {
 		if (btnJugar == null) {
+			
 			btnJugar = new JButton("");
 			btnJugar.setBounds(423, 70, 70, 70);
 			btnJugar.setBackground(Color.WHITE);
 			
 			btnJugar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					
 					if(rdbtn2Jugadores.isSelected()){
 						IU_2jugadores nombres = new IU_2jugadores();
 						setVisible(false);
@@ -313,14 +315,14 @@ public class IU_menu1 extends JFrame {
 						
 						
 					}else if(rdbtnModoFacil.isSelected()){
-						IU_1Jugador interfaz = new IU_1Jugador();
+						IU_1jugador interfaz = new IU_1jugador();
 						interfaz.ponerDificultad("FACIL");
 						setVisible(false);
 						interfaz.setVisible(true);
 						
 						
 					}else if(rdbtnModoDificil.isSelected()){
-						IU_1Jugador interfaz = new IU_1Jugador();
+						IU_1jugador interfaz = new IU_1jugador();
 						interfaz.ponerDificultad("DIFICIL");
 						setVisible(false);
 						interfaz.setVisible(true);
