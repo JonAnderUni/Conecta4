@@ -422,7 +422,7 @@ public class Tablero extends Observable{
 					}
 				}
 			}
-			CVacias = 0;	
+			CVacias = cont;	
 		}
 		return vict;
 	}
