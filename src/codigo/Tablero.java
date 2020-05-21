@@ -32,7 +32,7 @@ public class Tablero extends Observable{
 		this.ancho = pAncho;
 		this.alto = pAlto;
 		this.tablero = new Casilla[ancho][alto];
-		System.out.println("Se ha generado el tablero");
+		//System.out.println("Se ha generado el tablero");
 	}
 	
 	public Casilla getCasilla(int pAncho, int pAlto) {
@@ -419,7 +419,7 @@ public class Tablero extends Observable{
 		if((ganador != null)) {	//|| (CVacias == 0)) {
 			vict = true;
 			Rank = calcularPuntuacionRanking();
-			System.out.println("HAS GANADO");
+			//System.out.println("HAS GANADO");
 		}else {
 			for(int i = 0; i < tablero.length; i++) {
 				for(int j = 0; j < tablero[i].length; j++) {
@@ -447,7 +447,7 @@ public class Tablero extends Observable{
                 linea[columna] = tablero[columna][fila].getC();
             }
             if (comprobarLinea(linea)) {
-            	System.out.println("h");
+            	//System.out.println("h");
             	if(turnoActual.getNum()==1){
 					ganador=j2;
 				}else{
@@ -477,7 +477,7 @@ public class Tablero extends Observable{
 			}
 	        
 			if (comprobarLinea(linea)) {
-				System.out.println("v");
+				//System.out.println("v");
 				if(turnoActual.getNum()==1){
 					ganador=j2;
 				}else{
@@ -511,7 +511,7 @@ public class Tablero extends Observable{
 		}
 		
 		if (comprobarLinea(linea)) {
-				System.out.println("d");
+				//System.out.println("d");
 				if(turnoActual.getNum()==1){
 					ganador=j2;
 				}else{
@@ -533,7 +533,7 @@ public class Tablero extends Observable{
 			}
 			
 			if (comprobarLinea(linea)) {
-					System.out.println("d");
+					//System.out.println("d");
 					if(turnoActual.getNum()==1){
 						ganador=j2;
 					}else{
@@ -555,7 +555,7 @@ public class Tablero extends Observable{
 				}
 				
 				if (comprobarLinea(linea)) {
-						System.out.println("d");
+						//System.out.println("d");
 						if(turnoActual.getNum()==1){
 							ganador=j2;
 						}else{
@@ -577,7 +577,7 @@ public class Tablero extends Observable{
 					}
 					
 					if (comprobarLinea(linea)) {
-							System.out.println("d");
+							//System.out.println("d");
 							if(turnoActual.getNum()==1){
 								ganador=j2;
 							}else{
@@ -599,7 +599,7 @@ public class Tablero extends Observable{
 						}
 						
 						if (comprobarLinea(linea)) {
-								System.out.println("d");
+								//System.out.println("d");
 								if(turnoActual.getNum()==1){
 									ganador=j2;
 								}else{
@@ -621,7 +621,7 @@ public class Tablero extends Observable{
 							}
 							
 							if (comprobarLinea(linea)) {
-									System.out.println("d");
+									//System.out.println("d");
 									if(turnoActual.getNum()==1){
 										ganador=j2;
 									}else{
@@ -644,7 +644,7 @@ public class Tablero extends Observable{
 								}
 								
 								if (comprobarLinea(linea)) {
-										System.out.println("d");
+										//System.out.println("d");
 										if(turnoActual.getNum()==1){
 											ganador=j2;
 										}else{
@@ -666,7 +666,7 @@ public class Tablero extends Observable{
 									}
 									
 									if (comprobarLinea(linea)) {
-											System.out.println("d");
+											//System.out.println("d");
 											if(turnoActual.getNum()==1){
 												ganador=j2;
 											}else{
@@ -707,7 +707,7 @@ public class Tablero extends Observable{
 		}
 		
 		if (comprobarLinea(linea)) {
-				System.out.println("d");
+				//System.out.println("d");
 				if(turnoActual.getNum()==1){
 					ganador=j2;
 				}else{
@@ -729,7 +729,7 @@ public class Tablero extends Observable{
 			}
 			
 			if (comprobarLinea(linea)) {
-					System.out.println("d");
+					//System.out.println("d");
 					if(turnoActual.getNum()==1){
 						ganador=j2;
 					}else{
@@ -751,7 +751,7 @@ public class Tablero extends Observable{
 				}
 				
 				if (comprobarLinea(linea)) {
-						System.out.println("d");
+						//System.out.println("d");
 						if(turnoActual.getNum()==1){
 							ganador=j2;
 						}else{
@@ -773,7 +773,7 @@ public class Tablero extends Observable{
 					}
 					
 					if (comprobarLinea(linea)) {
-							System.out.println("d");
+							//System.out.println("d");
 							if(turnoActual.getNum()==1){
 								ganador=j2;
 							}else{
@@ -795,7 +795,7 @@ public class Tablero extends Observable{
 						}
 						
 						if (comprobarLinea(linea)) {
-								System.out.println("d");
+								//System.out.println("d");
 								if(turnoActual.getNum()==1){
 									ganador=j2;
 								}else{
@@ -817,7 +817,7 @@ public class Tablero extends Observable{
 							}
 							
 							if (comprobarLinea(linea)) {
-									System.out.println("d");
+									//System.out.println("d");
 									if(turnoActual.getNum()==1){
 										ganador=j2;
 									}else{
@@ -840,7 +840,7 @@ public class Tablero extends Observable{
 								}
 								
 								if (comprobarLinea(linea)) {
-										System.out.println("d");
+										//System.out.println("d");
 										if(turnoActual.getNum()==1){
 											ganador=j2;
 										}else{
@@ -862,7 +862,7 @@ public class Tablero extends Observable{
 									}
 									
 									if (comprobarLinea(linea)) {
-											System.out.println("d");
+											//System.out.println("d");
 											if(turnoActual.getNum()==1){
 												ganador=j2;
 											}else{
