@@ -126,7 +126,7 @@ public class IU_menu1 extends JFrame {
 			}*/
 		
 		//Image ayuda = new ImageIcon("C:/Users/Jon/Desktop/ayuda.png").getImage();
-		Image ayuda = new ImageIcon("/img/ayuda.png").getImage();
+		Image ayuda = new ImageIcon("img/ayuda.png").getImage();
 		ImageIcon ayuda2 = new ImageIcon(ayuda.getScaledInstance(25, 40, Image.SCALE_SMOOTH));
 
 		btnAyuda.setIcon(ayuda2);
@@ -169,7 +169,7 @@ public class IU_menu1 extends JFrame {
 					e1.printStackTrace();
 				}
 			*/
-		Image eusk = new ImageIcon("euskera.png").getImage();
+		Image eusk = new ImageIcon("img/euskera.png").getImage();
 		ImageIcon eus2 = new ImageIcon(eusk.getScaledInstance(70, 40, Image.SCALE_SMOOTH));
 
 		eus.setIcon(eus2);
@@ -212,7 +212,7 @@ public class IU_menu1 extends JFrame {
 			}
 		*/
 		
-		Image esp1 = new ImageIcon("castellano.png").getImage();
+		Image esp1 = new ImageIcon("img/castellano.png").getImage();
 		ImageIcon esp2 = new ImageIcon(esp1.getScaledInstance(70, 40, Image.SCALE_SMOOTH));
 
 		esp.setIcon(esp2);
@@ -366,7 +366,7 @@ public class IU_menu1 extends JFrame {
 			}
 		*/
 		
-		Image play1 = new ImageIcon("play.png").getImage();
+		Image play1 = new ImageIcon("img/play.png").getImage();
 		ImageIcon play2 = new ImageIcon(play1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
 		btnJugar.setIcon(play2);
