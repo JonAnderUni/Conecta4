@@ -6,6 +6,7 @@ public class Conecta4{
 	private static Conecta4 miConecta4 = null;
 	
 	private String idioma = "Castellano";
+	private boolean fin = false;
 	
 	
 	
@@ -29,6 +30,14 @@ public class Conecta4{
 	
 	public void setIdioma(String pIdioma){
 		this.idioma = pIdioma;
+	}
+	
+	public boolean getFin(){
+		return fin;
+	}
+	
+	public void setFin(boolean pFin){
+		fin = pFin;
 	}
 	
 	public void empezarPartida(){

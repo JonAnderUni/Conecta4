@@ -43,6 +43,9 @@ public class Tablero extends Observable{
 		tablero[rAncho][rAlto] = nuevaCas;
 	}
 	
+	public int getVacias(){
+		return CVacias;
+	}
 
 	
 	
@@ -409,6 +412,9 @@ public class Tablero extends Observable{
 		//	}
 		}
 		
+		//int numVacias = 54 - getFichasMetidas();
+		//CVacias = numVacias ;
+		//System.out.println("Las vacias son " + CVacias);
 		
 		if((ganador != null)) {	//|| (CVacias == 0)) {
 			vict = true;
@@ -424,6 +430,9 @@ public class Tablero extends Observable{
 			}
 			CVacias = cont;	
 		}
+	
+		//System.out.print(CVacias);
+		//System.out.println("Las vacias son " + CVacias);
 		return vict;
 	}
 	
@@ -972,7 +981,9 @@ public class Tablero extends Observable{
 	}
 	
 	public int calcularPuntuacionRanking() {
-		int p = CVacias * 18;
+		CVacias--;
+		int p = (CVacias) * 18;
+		System.out.println("Las vacias son " + CVacias);
 		return p;
 	}
 	
