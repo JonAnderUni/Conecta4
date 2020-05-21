@@ -61,6 +61,7 @@ public class IU_juego extends JFrame implements Observer{
 	
 	private boolean fin = false;
 
+
 	
 	
 	/**
@@ -75,6 +76,9 @@ public class IU_juego extends JFrame implements Observer{
 					
 					System.out.println("El jugador 1 es " + Conecta4.getConecta4().getTablero().getJugador1().getNombre());
 					
+					
+					
+					
 			/*		System.out.println("EMPEZAMOS");
 					Conecta4.getConecta4().empezarPartida();
 					Conecta4.getConecta4().getTablero().generarTablero();
@@ -87,6 +91,8 @@ public class IU_juego extends JFrame implements Observer{
 			}
 		});
 	}
+	
+
 
 	/**
 	 * Create the frame.
@@ -318,10 +324,17 @@ public class IU_juego extends JFrame implements Observer{
 											
 											lblJugador.setText(Conecta4.getConecta4().getTablero().getJugador1().getNombre());
 											Conecta4.getConecta4().getTablero().comprobarVictoria();
-											if(Conecta4.getConecta4().getTablero().hayGanador()){
+											if(Conecta4.getConecta4().getTablero().hayGanador() && !fin){
 												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
 												System.out.println("Ha ganado " + ganador.getNombre());
 												fin = true;
+												//setVisible(false);
+												IU_ganado ganado = new IU_ganado();
+												ganado.setVisible(true);
+												setVisible(false);
+												
+
+												
 											}
 											
 											
@@ -354,8 +367,134 @@ public class IU_juego extends JFrame implements Observer{
 									
 									botones[resultado[0]][resultado[1]].setIcon(new ImageIcon(color));
 
+									Conecta4.getConecta4().getTablero().comprobarVictoria();
+									if(Conecta4.getConecta4().getTablero().hayGanador() && !fin){
+										Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
+										System.out.println("Ha ganado " + ganador.getNombre());
+										fin = true;
+										//setVisible(false);
+										IU_ganado ganado = new IU_ganado();
+										ganado.setVisible(true);
+										setVisible(false);
+										
+
+										
+									}
+										
+									
+									//////////////////
+									}else if(modo.equals("DIFICIL")){
+										
+										System.out.println("ESTAS EN MODO DIFICIL");
+										System.out.println("click izquierdo");
+										e.getSource();
+										
+										String cmd = etiqueta.getText();
+										System.out.println(cmd);
+										String splitXY = ",";
+										String[] data = cmd.split(splitXY);
+										
+										int ancho = Integer.parseInt(data[0]);
+										int alto = Integer.parseInt(data[1]);
+										
+										int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
+										
+										System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
+										
+										if(nuevoAlto!=-1){
+											//String turno = Conecta4.getConecta4().getTablero().getTurno();
+											Jugador j = Conecta4.getConecta4().getTablero().getTurnoActual();
+		
+											Image color = null;
+											
+											
+												//lblJugador.setForeground(Color.BLUE);
+												System.out.println(j.getNombre() + " acaba de meter ficha");
+												try {
+													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
+													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		
+													} catch (IOException e1) {
+														e1.printStackTrace();
+													}
+												
+											
+											
+											botones[ancho][nuevoAlto].setIcon(new ImageIcon(color));
+	
+											
+											
+											
+											Conecta4.getConecta4().getTablero().cambiarTurno();
+											Jugador turnoActual = Conecta4.getConecta4().getTablero().getTurnoActual();
+											
+											lblJugador.setText(Conecta4.getConecta4().getTablero().getJugador1().getNombre());
+											Conecta4.getConecta4().getTablero().comprobarVictoria();
+											if(Conecta4.getConecta4().getTablero().hayGanador()){
+												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
+												System.out.println("Ha ganado " + ganador.getNombre());
+												fin = true;
+												//setVisible(false);
+												IU_ganado ganado = new IU_ganado();
+												ganado.setVisible(true);
+												setVisible(false);
+												
+
+												
+											}
+											
+											
+											
+										
+										}else{
+											
+											System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
+											
+										}
 										
 										
+										//int[] resultado = 
+												Conecta4.getConecta4().getTablero().turnoDificil();
+									//	System.out.println(resultado[0]);
+									//	System.out.println(resultado[1]);
+										
+										Conecta4.getConecta4().getTablero().cambiarTurno();
+										Image color = null;
+										
+										
+										try {
+											color = ImageIO.read(getClass().getResource("../img/azul.png"));
+											color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+
+											} catch (IOException e1) {
+												e1.printStackTrace();
+											}
+										
+									
+									
+							//		botones[resultado[0]][resultado[1]].setIcon(new ImageIcon(color));
+
+									Conecta4.getConecta4().getTablero().comprobarVictoria();
+									if(Conecta4.getConecta4().getTablero().hayGanador()){
+										Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
+										System.out.println("Ha ganado " + ganador.getNombre());
+										fin = true;
+										//setVisible(false);
+										IU_ganado ganado = new IU_ganado();
+										ganado.setVisible(true);
+										setVisible(false);
+										
+
+										
+									}
+										
+									
+									
+									
+									
+									
+									
+									
 									}
 									
 								////////////////////////////////////////////////////////
