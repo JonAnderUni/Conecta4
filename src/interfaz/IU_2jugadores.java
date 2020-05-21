@@ -122,8 +122,14 @@ public class IU_2jugadores extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
+				JButton cancelButton = new JButton("<<<<");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						IU_menu1 atras = new IU_menu1();
+						atras.setVisible(true);
+						setVisible(false);
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}

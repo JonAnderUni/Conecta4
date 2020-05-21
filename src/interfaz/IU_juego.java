@@ -126,7 +126,7 @@ public class IU_juego extends JFrame implements Observer{
 		
 		
 		
-		
+/*		
 		this.setJMenuBar(menuBarra);
 		archivo.setText("Archivo");
 		nuevo.setText("Nuevo");
@@ -140,7 +140,7 @@ public class IU_juego extends JFrame implements Observer{
 		menuBarra.add(archivo);
 		menuBarra.add(ayuda);
 		
-		
+		*/
 		
 	}
 	
@@ -152,12 +152,11 @@ public class IU_juego extends JFrame implements Observer{
 			Dimension dim = new Dimension(25, 25);
 			panel.setLayout(new GridLayout(alto, ancho, 0, 0));
 			
-			Image fondoBlanco = null;
-			try {
-				fondoBlanco = ImageIO.read(getClass().getResource("../img/blanco.png"));
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			ImageIcon fondoBlanco = null;
+			
+			Image blanco1 = new ImageIcon("blanco.png").getImage();
+			fondoBlanco = new ImageIcon(blanco1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
 			
 			
 			for (int j = 0; j < alto; j++) {
@@ -177,7 +176,7 @@ public class IU_juego extends JFrame implements Observer{
 					etiqueta.setVisible(false);
 					botones[i][j].add(etiqueta);
 					
-					botones[i][j].setIcon(new ImageIcon(fondoBlanco));
+					botones[i][j].setIcon(fondoBlanco);
 
 					botones[i][j].addMouseListener(new MouseListener() {
 						
@@ -225,32 +224,25 @@ public class IU_juego extends JFrame implements Observer{
 											//String turno = Conecta4.getConecta4().getTablero().getTurno();
 											Jugador j = Conecta4.getConecta4().getTablero().getTurnoActual();
 		
-											Image color = null;
+											ImageIcon color = null;
 											
 											if(j.getNum()==1){
 												lblJugador.setForeground(Color.BLUE);
 												//System.out.println(j.getNombre() + " acaba de meter ficha");
-												try {
-													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
-													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		
-													} catch (IOException e1) {
-														e1.printStackTrace();
-													}
+												Image rojo1 = new ImageIcon("rojo.png").getImage();
+												color = new ImageIcon(rojo1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
+												
 												
 											}else{
 												lblJugador.setForeground(Color.RED);
 											//System.out.println(j.getNombre() + " acaba de meter ficha");
-												try{
-													color = ImageIO.read(getClass().getResource("../img/azul.png"));
-													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		
-												} catch(IOException e1){
-													e1.printStackTrace();
-												}
+												Image azul1 = new ImageIcon("azul.png").getImage();
+												color = new ImageIcon(azul1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
 											}
 											
-											botones[ancho][nuevoAlto].setIcon(new ImageIcon(color));
+											botones[ancho][nuevoAlto].setIcon(color);
 	
 											
 	
@@ -264,6 +256,9 @@ public class IU_juego extends JFrame implements Observer{
 												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
 											//	System.out.println("Ha ganado " + ganador.getNombre());
 												fin = true;
+												IU_ganado2 ganado2 = new IU_ganado2();
+												setVisible(false);
+												ganado2.setVisible(true);
 											}
 											
 											
@@ -298,22 +293,18 @@ public class IU_juego extends JFrame implements Observer{
 											//String turno = Conecta4.getConecta4().getTablero().getTurno();
 											Jugador j = Conecta4.getConecta4().getTablero().getTurnoActual();
 		
-											Image color = null;
+											ImageIcon color = null;
 											
 											
 												//lblJugador.setForeground(Color.BLUE);
 												//System.out.println(j.getNombre() + " acaba de meter ficha");
-												try {
-													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
-													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		
-													} catch (IOException e1) {
-														e1.printStackTrace();
-													}
+											Image rojo1 = new ImageIcon("rojo.png").getImage();
+											color = new ImageIcon(rojo1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
 												
 											
 											
-											botones[ancho][nuevoAlto].setIcon(new ImageIcon(color));
+											botones[ancho][nuevoAlto].setIcon(color);
 	
 											
 											
@@ -351,20 +342,14 @@ public class IU_juego extends JFrame implements Observer{
 									//	System.out.println(resultado[1]);
 										
 										Conecta4.getConecta4().getTablero().cambiarTurno();
-										Image color = null;
+										ImageIcon color = null;
 										
-										
-										try {
-											color = ImageIO.read(getClass().getResource("../img/azul.png"));
-											color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+										Image azul1 = new ImageIcon("azul.png").getImage();
+										color = new ImageIcon(azul1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
-											} catch (IOException e1) {
-												e1.printStackTrace();
-											}
-										
 									
 									
-									botones[resultado[0]][resultado[1]].setIcon(new ImageIcon(color));
+									botones[resultado[0]][resultado[1]].setIcon(color);
 
 									Conecta4.getConecta4().getTablero().comprobarVictoria();
 									if(Conecta4.getConecta4().getTablero().hayGanador() && !fin){
@@ -404,22 +389,17 @@ public class IU_juego extends JFrame implements Observer{
 											//String turno = Conecta4.getConecta4().getTablero().getTurno();
 											Jugador j = Conecta4.getConecta4().getTablero().getTurnoActual();
 		
-											Image color = null;
+											ImageIcon color = null;
 											
 											
 												//lblJugador.setForeground(Color.BLUE);
 											//	System.out.println(j.getNombre() + " acaba de meter ficha");
-												try {
-													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
-													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		
-													} catch (IOException e1) {
-														e1.printStackTrace();
-													}
-												
+											Image rojo1 = new ImageIcon("rojo.png").getImage();
+											color = new ImageIcon(rojo1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
 											
 											
-											botones[ancho][nuevoAlto].setIcon(new ImageIcon(color));
+											botones[ancho][nuevoAlto].setIcon(color);
 	
 											
 											
@@ -458,17 +438,11 @@ public class IU_juego extends JFrame implements Observer{
 									//	System.out.println(resultado[1]);
 										
 										Conecta4.getConecta4().getTablero().cambiarTurno();
-										Image color = null;
+										ImageIcon color = null;
 										
-										
-										try {
-											color = ImageIO.read(getClass().getResource("../img/azul.png"));
-											color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+										Image azul1 = new ImageIcon("azul.png").getImage();
+										color = new ImageIcon(azul1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
-											} catch (IOException e1) {
-												e1.printStackTrace();
-											}
-										
 									
 									
 							//		botones[resultado[0]][resultado[1]].setIcon(new ImageIcon(color));

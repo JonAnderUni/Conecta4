@@ -135,7 +135,14 @@ public class IU_1jugador extends JFrame {
 	}
 	private JButton getBtnAtras() {
 		if (btnAtras == null) {
-			btnAtras = new JButton("Atr\u00E1s");
+			btnAtras = new JButton("<<<<");
+			btnAtras.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					IU_menu1 atras = new IU_menu1();
+					atras.setVisible(true);
+					setVisible(false);
+				}
+			});
 		}
 		return btnAtras;
 	}

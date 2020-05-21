@@ -114,17 +114,23 @@ public class IU_menu1 extends JFrame {
 		
 		}
 		
-		Image ayuda = null;
+		//Image ayuda = null;
 		
-		try {
-			ayuda = ImageIO.read(getClass().getResource("../img/ayuda.png"));
+	/*	try {
+			ayuda = ImageIO.read(getClass().getResource("../interfaz/ayuda.png"));
+			//ayuda = ImageIO.read(getClass().getResource("C:/Users/Jon/Desktop/ayuda.png"));
 			ayuda = ayuda.getScaledInstance(25, 40, Image.SCALE_SMOOTH);
 
 			} catch (IOException e1) {
 				e1.printStackTrace();
-			}
+			}*/
 		
-		btnAyuda.setIcon(new ImageIcon(ayuda));
+		//Image ayuda = new ImageIcon("C:/Users/Jon/Desktop/ayuda.png").getImage();
+		Image ayuda = new ImageIcon("/img/ayuda.png").getImage();
+		ImageIcon ayuda2 = new ImageIcon(ayuda.getScaledInstance(25, 40, Image.SCALE_SMOOTH));
+
+		btnAyuda.setIcon(ayuda2);
+		//btnAyuda.setIcon(new ImageIcon(ayuda));
 		
 		return btnAyuda;
 	}
@@ -154,19 +160,24 @@ public class IU_menu1 extends JFrame {
 		
 		Image euskadi = null;
 		
-		
+		/*
 			try {
-				euskadi = ImageIO.read(getClass().getResource("../img/euskera.png"));
+				euskadi = ImageIO.read(getClass().getResource("../interfaz/euskera.png"));
 				euskadi = euskadi.getScaledInstance(70, 40, Image.SCALE_SMOOTH);
 
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-			
-			eus.setIcon(new ImageIcon(euskadi));
-			
-			
+			*/
+		Image eusk = new ImageIcon("euskera.png").getImage();
+		ImageIcon eus2 = new ImageIcon(eusk.getScaledInstance(70, 40, Image.SCALE_SMOOTH));
+
+		eus.setIcon(eus2);
+		//btnAyuda.setIcon(new ImageIcon(ayuda));
+		
+			//eus.setIcon(new ImageIcon(euskadi));
 		return eus;
+		
 	}
 	private JButton getCastellano() {
 		if (esp == null) {
@@ -191,16 +202,24 @@ public class IU_menu1 extends JFrame {
 		
 		Image castellano = null;
 		
-		
+	/*	
 		try {
-			castellano = ImageIO.read(getClass().getResource("../img/castellano.png"));
+			castellano = ImageIO.read(getClass().getResource("../interfaz/castellano.png"));
 			castellano = castellano.getScaledInstance(70, 40, Image.SCALE_SMOOTH);
 
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+		*/
 		
-		esp.setIcon(new ImageIcon(castellano));
+		Image esp1 = new ImageIcon("castellano.png").getImage();
+		ImageIcon esp2 = new ImageIcon(esp1.getScaledInstance(70, 40, Image.SCALE_SMOOTH));
+
+		esp.setIcon(esp2);
+		//btnAyuda.setIcon(new ImageIcon(ayuda));
+		
+
+		//esp.setIcon(new ImageIcon(castellano));
 		
 		return esp;
 	}
@@ -337,16 +356,24 @@ public class IU_menu1 extends JFrame {
 		}
 		
 		Image play = null;
-		
+	/*	
 		try {
-			play = ImageIO.read(getClass().getResource("../img/play.png"));
+			play = ImageIO.read(getClass().getResource("../interfaz/play.png"));
 			play = play.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+		*/
 		
-		btnJugar.setIcon(new ImageIcon(play));
+		Image play1 = new ImageIcon("play.png").getImage();
+		ImageIcon play2 = new ImageIcon(play1.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
+		btnJugar.setIcon(play2);
+		//btnAyuda.setIcon(new ImageIcon(ayuda));
+		
+
+		//btnJugar.setIcon(new ImageIcon(play));
 		return btnJugar;
 	}
 	

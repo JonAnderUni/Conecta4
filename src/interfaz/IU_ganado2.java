@@ -28,7 +28,7 @@ import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import javax.swing.ScrollPaneConstants;
 
-public class IU_ganado extends JDialog {
+public class IU_ganado2 extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblHaGanado;
@@ -43,7 +43,7 @@ public class IU_ganado extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			IU_ganado dialog = new IU_ganado();
+			IU_ganado2 dialog = new IU_ganado2();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class IU_ganado extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public IU_ganado() {
+	public IU_ganado2() {
 		setBounds(100, 100, 514, 407);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,22 +62,13 @@ public class IU_ganado extends JDialog {
 		contentPanel.setLayout(null);
 		contentPanel.add(getLblHaGanado());
 		contentPanel.add(getLblGanador());
-		contentPanel.add(getTextArea());
 	//	contentPanel.add(getScrollPane());
 		//scroll = new JScrollPane(area);
-		
-
-		
-		
-			
-		
-		
-		
 		
 		
 		
 		{
-			JPanel buttonPane = new JPanel();			
+			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -89,6 +80,7 @@ public class IU_ganado extends JDialog {
 					buttonPane.add(texto);
 				}
 				
+				
 				JButton okButton = new JButton("V");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -98,6 +90,7 @@ public class IU_ganado extends JDialog {
 						setVisible(false);
 					}
 				});
+				
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -121,8 +114,7 @@ public class IU_ganado extends JDialog {
 				lblHaGanado = new JLabel("HA GANADO");
 			}else{
 				lblHaGanado = new JLabel("IRABAZI DU");
-			}
-			
+			}			
 			lblHaGanado.setHorizontalAlignment(SwingConstants.CENTER);
 			lblHaGanado.setFont(new Font("Tahoma", Font.BOLD, 20));
 			lblHaGanado.setBounds(12, 32, 472, 36);
@@ -143,66 +135,6 @@ public class IU_ganado extends JDialog {
 		}
 		return lblGanador;
 	}
-	private JTextArea getTextArea() {
-		if (area == null) {
-			area = new JTextArea();
-			area.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			area.setBounds(53, 149, 382, 131);
-			
-			//area.append("FACIL");
-			
-			obtenerNombres();
-		}
-		return area;
-	}
 	
-	
-	
-	public void obtenerNombres(){
-		
-		String l = Conecta4.getConecta4().getTablero().getGanador().getNombre() + " --> " + 
-				Conecta4.getConecta4().getTablero().getVacias();
-		area.append(l + "\n");
-		
-		try {
-			FileReader fr = new FileReader("puntuaciones.txt");
-			BufferedReader br = new BufferedReader(fr);
-			String linea = br.readLine();
-			while (linea != null) {
-				if (linea.isEmpty()){
-					linea = br.readLine();
-				}
-				else {
-					
-				
-				area.append(linea + "\n");		
-				
-				linea = br.readLine();
-				}
-			}
-			br.close();	
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-		}
-		
-
-				File file = new File("puntuaciones.txt");
-
-				try {
-
-					FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
-					BufferedWriter bw = new BufferedWriter(fw);
-			        bw.write(l + "\n");
-			        
-
-					bw.close();
-					fw.close();
-
-				} catch (Exception ex) {
-					System.out.println("Mensaje de la excepción: " + ex.getMessage());
-				}
-			
-	}	
 	
 }
