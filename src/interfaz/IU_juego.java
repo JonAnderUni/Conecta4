@@ -74,7 +74,6 @@ public class IU_juego extends JFrame implements Observer{
 					IU_juego frame = new IU_juego();
 					frame.setVisible(true);
 					
-					System.out.println("El jugador 1 es " + Conecta4.getConecta4().getTablero().getJugador1().getNombre());
 					
 					
 					
@@ -207,11 +206,11 @@ public class IU_juego extends JFrame implements Observer{
 									
 									if(modo.equals("USUARIO")){
 										
-										System.out.println("click izquierdo");
+										//System.out.println("click izquierdo");
 										e.getSource();
 										
 										String cmd = etiqueta.getText();
-										System.out.println(cmd);
+										//System.out.println(cmd);
 										String splitXY = ",";
 										String[] data = cmd.split(splitXY);
 										
@@ -220,7 +219,7 @@ public class IU_juego extends JFrame implements Observer{
 										
 										int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
 										
-										System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
+										//System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
 										
 										if(nuevoAlto!=-1){
 											//String turno = Conecta4.getConecta4().getTablero().getTurno();
@@ -230,7 +229,7 @@ public class IU_juego extends JFrame implements Observer{
 											
 											if(j.getNum()==1){
 												lblJugador.setForeground(Color.BLUE);
-												System.out.println(j.getNombre() + " acaba de meter ficha");
+												//System.out.println(j.getNombre() + " acaba de meter ficha");
 												try {
 													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
 													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -241,7 +240,7 @@ public class IU_juego extends JFrame implements Observer{
 												
 											}else{
 												lblJugador.setForeground(Color.RED);
-												System.out.println(j.getNombre() + " acaba de meter ficha");
+											//System.out.println(j.getNombre() + " acaba de meter ficha");
 												try{
 													color = ImageIO.read(getClass().getResource("../img/azul.png"));
 													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -263,7 +262,7 @@ public class IU_juego extends JFrame implements Observer{
 											Conecta4.getConecta4().getTablero().comprobarVictoria();
 											if(Conecta4.getConecta4().getTablero().hayGanador()){
 												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
-												System.out.println("Ha ganado " + ganador.getNombre());
+											//	System.out.println("Ha ganado " + ganador.getNombre());
 												fin = true;
 											}
 											
@@ -272,19 +271,19 @@ public class IU_juego extends JFrame implements Observer{
 										
 										}else{
 											
-											System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
+											//System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
 											
 										}
 								/////////////////////////////////////////////////
 										
 									}else if(modo.equals("FACIL")){
 										
-										System.out.println("ESTAS EN MODO FACIL");
-										System.out.println("click izquierdo");
+										//System.out.println("ESTAS EN MODO FACIL");
+										//System.out.println("click izquierdo");
 										e.getSource();
 										
 										String cmd = etiqueta.getText();
-										System.out.println(cmd);
+										//System.out.println(cmd);
 										String splitXY = ",";
 										String[] data = cmd.split(splitXY);
 										
@@ -293,7 +292,7 @@ public class IU_juego extends JFrame implements Observer{
 										
 										int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
 										
-										System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
+										//System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
 										
 										if(nuevoAlto!=-1){
 											//String turno = Conecta4.getConecta4().getTablero().getTurno();
@@ -303,7 +302,7 @@ public class IU_juego extends JFrame implements Observer{
 											
 											
 												//lblJugador.setForeground(Color.BLUE);
-												System.out.println(j.getNombre() + " acaba de meter ficha");
+												//System.out.println(j.getNombre() + " acaba de meter ficha");
 												try {
 													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
 													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -326,7 +325,7 @@ public class IU_juego extends JFrame implements Observer{
 											Conecta4.getConecta4().getTablero().comprobarVictoria();
 											if(Conecta4.getConecta4().getTablero().hayGanador() && !fin){
 												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
-												System.out.println("Ha ganado " + ganador.getNombre());
+												//System.out.println("Ha ganado " + ganador.getNombre());
 												fin = true;
 												//setVisible(false);
 												IU_ganado ganado = new IU_ganado();
@@ -342,14 +341,14 @@ public class IU_juego extends JFrame implements Observer{
 										
 										}else{
 											
-											System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
+											//System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
 											
 										}
 										
 										
 										int[] resultado = Conecta4.getConecta4().getTablero().turnoFacil();
-										System.out.println(resultado[0]);
-										System.out.println(resultado[1]);
+										//System.out.println(resultado[0]);
+									//	System.out.println(resultado[1]);
 										
 										Conecta4.getConecta4().getTablero().cambiarTurno();
 										Image color = null;
@@ -370,7 +369,7 @@ public class IU_juego extends JFrame implements Observer{
 									Conecta4.getConecta4().getTablero().comprobarVictoria();
 									if(Conecta4.getConecta4().getTablero().hayGanador() && !fin){
 										Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
-										System.out.println("Ha ganado " + ganador.getNombre());
+									//	System.out.println("Ha ganado " + ganador.getNombre());
 										fin = true;
 										//setVisible(false);
 										IU_ganado ganado = new IU_ganado();
@@ -385,12 +384,12 @@ public class IU_juego extends JFrame implements Observer{
 									//////////////////
 									}else if(modo.equals("DIFICIL")){
 										
-										System.out.println("ESTAS EN MODO DIFICIL");
-										System.out.println("click izquierdo");
+									//	System.out.println("ESTAS EN MODO DIFICIL");
+										//System.out.println("click izquierdo");
 										e.getSource();
 										
 										String cmd = etiqueta.getText();
-										System.out.println(cmd);
+									//	System.out.println(cmd);
 										String splitXY = ",";
 										String[] data = cmd.split(splitXY);
 										
@@ -399,7 +398,7 @@ public class IU_juego extends JFrame implements Observer{
 										
 										int nuevoAlto = Conecta4.getConecta4().getTablero().meterFicha(ancho, alto);
 										
-										System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
+									//	System.out.println(Conecta4.getConecta4().getTablero().getCasilla(ancho, alto).getC());
 										
 										if(nuevoAlto!=-1){
 											//String turno = Conecta4.getConecta4().getTablero().getTurno();
@@ -409,7 +408,7 @@ public class IU_juego extends JFrame implements Observer{
 											
 											
 												//lblJugador.setForeground(Color.BLUE);
-												System.out.println(j.getNombre() + " acaba de meter ficha");
+											//	System.out.println(j.getNombre() + " acaba de meter ficha");
 												try {
 													color = ImageIO.read(getClass().getResource("../img/rojo.png"));
 													color = color.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -432,7 +431,7 @@ public class IU_juego extends JFrame implements Observer{
 											Conecta4.getConecta4().getTablero().comprobarVictoria();
 											if(Conecta4.getConecta4().getTablero().hayGanador()){
 												Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
-												System.out.println("Ha ganado " + ganador.getNombre());
+												//System.out.println("Ha ganado " + ganador.getNombre());
 												fin = true;
 												//setVisible(false);
 												IU_ganado ganado = new IU_ganado();
@@ -448,7 +447,7 @@ public class IU_juego extends JFrame implements Observer{
 										
 										}else{
 											
-											System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
+										//	System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
 											
 										}
 										
@@ -477,7 +476,7 @@ public class IU_juego extends JFrame implements Observer{
 									Conecta4.getConecta4().getTablero().comprobarVictoria();
 									if(Conecta4.getConecta4().getTablero().hayGanador()){
 										Jugador ganador = Conecta4.getConecta4().getTablero().getGanador();
-										System.out.println("Ha ganado " + ganador.getNombre());
+										//System.out.println("Ha ganado " + ganador.getNombre());
 										fin = true;
 										//setVisible(false);
 										IU_ganado ganado = new IU_ganado();
