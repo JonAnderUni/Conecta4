@@ -963,7 +963,7 @@ public class Tablero extends Observable{
 		int nuevoAlto = -1;
 		
 		if(columnaLlena(pAncho, pAlto)){
-			System.out.println("NO SE PUEDE METER LA FICHA");
+			//System.out.println("NO SE PUEDE METER LA FICHA");
 		}else{
 			nuevoAlto=5;
 			while(!encontrado){
@@ -983,7 +983,7 @@ public class Tablero extends Observable{
 	public int calcularPuntuacionRanking() {
 		CVacias--;
 		int p = (CVacias) * 18;
-		System.out.println("Las vacias son " + CVacias);
+		//System.out.println("Las vacias son " + CVacias);
 		return p;
 	}
 	
