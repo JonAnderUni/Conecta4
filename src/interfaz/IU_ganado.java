@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import codigo.Conecta4;
-
+import codigo.Ranking;
 
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -151,29 +151,31 @@ public class IU_ganado extends JDialog {
 			
 			//area.append("FACIL");
 			
-			obtenerNombres();
+			obtenerRanking();
 		}
 		return area;
 	}
 	
 	
 	
-	public void obtenerNombres(){
+	public void obtenerRanking(){
 		
 		String l = Conecta4.getConecta4().getTablero().getGanador().getNombre() + " --> " + 
 				Conecta4.getConecta4().getTablero().getVacias();
-		area.append(l + "\n");
+		Ranking.getRanking().guardarEnFichero(Conecta4.getConecta4().getTablero().getGanador().getNombre(), Conecta4.getConecta4().getTablero().getVacias());
 		
 		try {
 			FileReader fr = new FileReader("puntuaciones.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String linea = br.readLine();
-			while (linea != null) {
+			int i = 0;
+			while (linea != null && i<=8) {
 				if (linea.isEmpty()){
 					linea = br.readLine();
+					
 				}
 				else {
-					
+					i++;
 				
 				area.append(linea + "\n");		
 				
@@ -183,7 +185,7 @@ public class IU_ganado extends JDialog {
 			br.close();	
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}/* finally {
 		}
 		
 
@@ -201,7 +203,7 @@ public class IU_ganado extends JDialog {
 
 				} catch (Exception ex) {
 					System.out.println("Mensaje de la excepción: " + ex.getMessage());
-				}
+				}*/
 			
 	}	
 	
