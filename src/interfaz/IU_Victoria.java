@@ -2,11 +2,15 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -16,7 +20,7 @@ public class IU_Victoria extends JFrame {
 	private URL url;
 	private JPanel panelGif;
 	private JPanel panelBoton;
-	private JButton btnNewButton;
+	private JButton btnOK;
 	private JLabel lblGif;
 	/**
 	 * Launch the application.
@@ -57,27 +61,46 @@ public class IU_Victoria extends JFrame {
 	private JPanel getPanelGif() {
 		if (panelGif == null) {
 			panelGif = new JPanel();
+			Icon icon = new ImageIcon("img/VictoryGif.gif");
+			getLblGif().setIcon(icon);
+			getLblGif().setSize(100,100);
 			panelGif.add(getLblGif());
+			
 		}
 		return panelGif;
 	}
 	private JPanel getPanelBoton() {
 		if (panelBoton == null) {
 			panelBoton = new JPanel();
-			panelBoton.add(getBtnNewButton());
+			panelBoton.add(getBtnOK());
+			
+			
 		}
 		return panelBoton;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("Ok");
+	private JButton getBtnOK() {
+		if (btnOK == null) {
+			btnOK = new JButton("Ok");
+			
+			btnOK.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					IU_ganado ganado = new IU_ganado();
+					ganado.setVisible(true);
+					setVisible(false);
+				}
+			});
 		}
-		return btnNewButton;
+		return btnOK;
 	}
 	private JLabel getLblGif() {
 		if (lblGif == null) {
 			lblGif = new JLabel("");
+			
 		}
 		return lblGif;
 	}
+	
 }

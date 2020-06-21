@@ -285,7 +285,7 @@ public class IU_juego extends JFrame implements Observer {
 												// System.out.println("Ha ganado " + ganador.getNombre());
 												fin = true;
 												// setVisible(false);
-												IU_ganado ganado = new IU_ganado();
+												IU_Victoria ganado = new IU_Victoria();
 												ganado.setVisible(true);
 												setVisible(false);
 
@@ -301,7 +301,7 @@ public class IU_juego extends JFrame implements Observer {
 										// System.out.println(resultado[0]);
 										// System.out.println(resultado[1]);
 
-										Conecta4.getConecta4().getTablero().cambiarTurno();
+										
 										ImageIcon color = null;
 
 										Image azul1 = new ImageIcon("img/azul.png").getImage();
@@ -320,7 +320,8 @@ public class IU_juego extends JFrame implements Observer {
 											setVisible(false);
 
 										}
-
+										Conecta4.getConecta4().getTablero().cambiarTurno();
+										
 										//////////////////
 									} else if (modo.equals("DIFICIL")) {
 
@@ -354,7 +355,7 @@ public class IU_juego extends JFrame implements Observer {
 
 											botones[ancho][nuevoAlto].setIcon(color);
 
-											Conecta4.getConecta4().getTablero().cambiarTurno();
+											
 											Jugador turnoActual = Conecta4.getConecta4().getTablero().getTurnoActual();
 
 											lblJugador.setText(
@@ -365,12 +366,12 @@ public class IU_juego extends JFrame implements Observer {
 												// System.out.println("Ha ganado " + ganador.getNombre());
 												fin = true;
 												// setVisible(false);
-												IU_ganado ganado = new IU_ganado();
+												IU_Victoria ganado = new IU_Victoria();
 												ganado.setVisible(true);
 												setVisible(false);
 
 											}
-
+											Conecta4.getConecta4().getTablero().cambiarTurno();
 										} else {
 
 											// System.out.println("VUELVE A SELECCIONAR OTRA CASILLA");
@@ -382,7 +383,7 @@ public class IU_juego extends JFrame implements Observer {
 										// System.out.println(resultado[0]);
 										// System.out.println(resultado[1]);
 
-										Conecta4.getConecta4().getTablero().cambiarTurno();
+										
 										ImageIcon color = null;
 
 										Image azul1 = new ImageIcon("img/azul.png").getImage();
@@ -401,7 +402,7 @@ public class IU_juego extends JFrame implements Observer {
 											setVisible(false);
 
 										}
-
+										Conecta4.getConecta4().getTablero().cambiarTurno();
 									}
 
 								}
