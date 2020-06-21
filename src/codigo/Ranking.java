@@ -10,13 +10,14 @@ import java.util.*;
 public class Ranking {
 
 	private static Ranking mRanking = null;
-	private HashMap<Integer, String> hash;
+	private HashMap<Integer, ArrayList<String>> hash;
 	private ArrayList<Integer> arrayList;
-	private int[] a;
 	
+
 	
 	private Ranking() {
 		hash = new HashMap<>();
+		
 		arrayList = new ArrayList<>();
 		leerFichero();
 	}
@@ -36,12 +37,19 @@ public class Ranking {
 			while((line = entrada.readLine()) != null) {
 				String[] split = line.split(" --> ");
 				int i = Integer.parseInt(split[1]);
-				hash.put(i, split[0]);
+				
+				if(hash.containsKey(i)) {
+					hash.get(i).add(split[0]);
+				}else {
+					hash.put(i, new ArrayList<>());
+					hash.get(i).add(split[0]);
+				}
 				arrayList.add(i);
 			}
-			a = new int[arrayList.size()];
+			int[] a = new int[arrayList.size()];
 			for (int i = 0; i < a.length; i++) {
 				a[i] = arrayList.get(i);
+				
 			}
 			if(!arrayList.isEmpty()) {
 				quickSort(a, 0, arrayList.size()-1);
@@ -97,7 +105,12 @@ public class Ranking {
 	}
 	
 	private void guardarEnArray(String s, int n) {
-		hash.put(n, s);
+		if(hash.containsKey(n)) {
+			hash.get(n).add(s);
+		}else {
+			hash.put(n, new ArrayList<>());
+			hash.get(n).add(s);
+		}
 		if (arrayList.get(arrayList.size()-1) >= n) {
 			arrayList.add(n);
 		} else if (arrayList.get(0) <= n) {
@@ -126,12 +139,24 @@ public class Ranking {
 		guardarEnArray(s, n);
 		try {
 			BufferedWriter wr = new BufferedWriter(new FileWriter("puntuaciones.txt"));
+			boolean[] usado = new boolean[arrayList.size()];
 			for (int i = 0; i < arrayList.size(); i++) {
-				wr.write(hash.get(arrayList.get(i)) + " --> " + arrayList.get(i) +"\n");
+				
+				for (int j = 0; j < hash.get(arrayList.get(i)).size() && usado[i] == false; j++) {
+					wr.write(hash.get(arrayList.get(i)).get(j) + " --> " + arrayList.get(i) +"\n");
+				}
+				for (int j = 0; j < usado.length; j++) {
+					if(arrayList.get(i) == arrayList.get(j)) {
+						usado[j] = true;
+					}
+				}
+				
 			}
 			wr.close();
 		} catch(Exception e){
 			
 		}
 	}
+	
+	
 }
